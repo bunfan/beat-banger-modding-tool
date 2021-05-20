@@ -9,28 +9,39 @@ var eighth_spawn = []
 
 var section
 
+var config = ConfigFile.new()
+
+var c_octave = [48,60,72]
+var cs_octave = [49,61,73]
+var d_octave = [50,62,74]
+
+
 func _ready():
 	print("Program Started")
 	$OptionButton.add_item("EASY")
-	$OptionButton.add_item("HARD")
-
-		
+	$OptionButton.add_item("HARD")	
 
 func on_generate():
+	load_json()
+
+
+	
+func load_json():
 	var file = File.new()
-	if file.open("res://VisiPiano.json", File.READ) == OK:
+	if file.open(Global.json_file, File.READ) == OK:
 		var text: String = file.get_as_text()
 		var data = JSON.parse(text)
 		var midi = data.result
 		create_chart(midi)
 
+
 func create_chart(midi):
+
 	bpm = midi["header"]["bpm"]
-	var time_sig = midi["header"]["timeSignature"]
+	# var time_sig = midi["header"]["timeSignature"]
 	var notes = midi["tracks"][2]["notes"]
-	
+
 	print(bpm)
-	print(time_sig)
 
 	half_spawn = []
 	quarter_spawn = []
@@ -38,32 +49,23 @@ func create_chart(midi):
 
 	for note in notes:
 		var midi_num = int(note["midi"])
-		var beat = int(floor(float(note["time"]*2) / (60/bpm)) + 1)
-		print(typeof(midi_num))
-		match midi_num:
-			71:
-				no_spawn.append(beat)
-				print("appended to No Spawn")
-			72:
-				half_spawn.append(beat)
-				print("appended to Half")
-			73:
-				quarter_spawn.append(beat)
-				print("appended to Qaurter")
-			74:
-				eighth_spawn.append(beat)
-				print("appended to Eighth")
-	
+		var beat = int(floor(float(note["time"]*2) / (60/bpm)))
+		if c_octave.has(midi_num):
+			half_spawn.append(beat)
+			print("appended %s to Half" % beat)
+		elif cs_octave.has(midi_num):
+			quarter_spawn.append(beat)
+			print("appended %s to Qaurter" % beat)
+		elif d_octave.has(midi_num):
+			eighth_spawn.append(beat)
+			print("appended %s to Eighth" % beat)
+		else:
+			no_spawn.append(beat)
+			print("appended %s to No Spawn" % beat)
+
 	export_chart()
 
-		
-		
-			
-
-
-
 func export_chart():
-	var config = ConfigFile.new()
 	section = $OptionButton.get_item_text($OptionButton.selected)
 
 	config.set_value(section, "name", $NameField.text)
@@ -92,7 +94,11 @@ func export_chart():
 			}
 		})
 	config.set_value(section, "lastBeat", [0])
-	config.save("res://chart.cfg")
+	config.save("user://chart.cfg")
 
 	OS.alert("Chart Successfully Generated", "Notice")
+	if OS.shell_open(ProjectSettings.globalize_path("user://chart.cfg")) == OK:
+		pass
+
+
 

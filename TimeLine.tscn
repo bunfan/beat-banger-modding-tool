@@ -1,17 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://ChartingTool.gd" type="Script" id=2]
+[ext_resource path="res://scripts/SongPath.gd" type="Script" id=1]
+[ext_resource path="res://scripts/ChartingTool.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="ChartingTool" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -66.0
 margin_bottom = -8.0
 script = ExtResource( 2 )
 __meta__ = {
@@ -19,30 +22,79 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-anchor_right = 1.208
+anchor_right = 1.0
 anchor_bottom = 1.016
-margin_right = -0.144012
-margin_bottom = -0.0640259
+margin_bottom = 4.672
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NameField" type="LineEdit" parent="."]
 margin_left = 40.0
-margin_top = 288.0
+margin_top = 56.0
 margin_right = 344.0
-margin_bottom = 312.0
+margin_bottom = 80.0
 custom_styles/normal = SubResource( 1 )
-placeholder_text = "Name"
+placeholder_text = "NAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SongPathField" type="LineEdit" parent="."]
+margin_left = 40.0
+margin_top = 88.0
+margin_right = 344.0
+margin_bottom = 112.0
+custom_styles/normal = SubResource( 1 )
+placeholder_text = "song_path.ogg"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JsonPath" type="LineEdit" parent="."]
+margin_left = 40.0
+margin_top = 120.0
+margin_right = 248.0
+margin_bottom = 152.0
+custom_styles/read_only = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
+editable = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="JsonPath"]
+margin_left = 216.0
+margin_right = 304.0
+margin_bottom = 32.0
+text = "Open JSON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="JsonPath"]
+margin_left = 376.0
+margin_top = -64.0
+margin_right = 784.0
+margin_bottom = 296.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.json ; JSON" )
+current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
+current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="."]
 margin_left = 40.0
-margin_top = 416.0
+margin_top = 160.0
 margin_right = 344.0
-margin_bottom = 482.0
+margin_bottom = 192.0
+disabled = true
 text = "Generate Chart"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,12 +102,16 @@ __meta__ = {
 
 [node name="OptionButton" type="OptionButton" parent="."]
 margin_left = 40.0
-margin_top = 316.0
+margin_top = 24.0
 margin_right = 344.0
-margin_bottom = 336.0
-custom_styles/normal = SubResource( 2 )
+margin_bottom = 48.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_up" from="JsonPath/Button" to="JsonPath" method="popup"]
+[connection signal="file_selected" from="JsonPath/FileDialog" to="JsonPath" method="on_file_selected"]
 [connection signal="button_up" from="Button" to="." method="on_generate"]
