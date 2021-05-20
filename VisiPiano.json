@@ -1,0 +1,283 @@
+{
+  "header": {
+    "PPQ": 96,
+    "timeSignature": [
+      4,
+      4
+    ],
+    "bpm": 128,
+    "name": ""
+  },
+  "tempo": [
+    {
+      "absoluteTime": 0,
+      "seconds": 0,
+      "bpm": 128
+    }
+  ],
+  "timeSignature": [
+    {
+      "absoluteTime": 0,
+      "seconds": 0,
+      "numerator": 4,
+      "denominator": 2,
+      "click": 24,
+      "notesQ": 8
+    }
+  ],
+  "startTime": 0,
+  "duration": 5.859375,
+  "tracks": [
+    {
+      "startTime": 0,
+      "duration": 0,
+      "length": 0,
+      "notes": [],
+      "controlChanges": {},
+      "id": 0
+    },
+    {
+      "startTime": 0,
+      "duration": 0,
+      "length": 0,
+      "notes": [],
+      "controlChanges": {},
+      "id": 1
+    },
+    {
+      "startTime": 0,
+      "duration": 5.859375,
+      "length": 11,
+      "notes": [
+        {
+          "name": "C5",
+          "midi": 72,
+          "time": 0,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C#5",
+          "midi": 73,
+          "time": 0.46875,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "D5",
+          "midi": 74,
+          "time": 0.9375,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "D5",
+          "midi": 74,
+          "time": 1.875,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C#5",
+          "midi": 73,
+          "time": 2.34375,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C5",
+          "midi": 72,
+          "time": 2.8125,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C5",
+          "midi": 72,
+          "time": 3.75,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C#5",
+          "midi": 73,
+          "time": 4.21875,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "D5",
+          "midi": 74,
+          "time": 4.6875,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C#5",
+          "midi": 73,
+          "time": 5.15625,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        },
+        {
+          "name": "C5",
+          "midi": 72,
+          "time": 5.625,
+          "velocity": 0.7874015748031497,
+          "duration": 0.234375
+        }
+      ],
+      "controlChanges": {
+        "6": [
+          {
+            "number": 6,
+            "time": 0,
+            "value": 0.09448818897637795
+          },
+          {
+            "number": 6,
+            "time": 0,
+            "value": 0.09448818897637795
+          },
+          {
+            "number": 6,
+            "time": 0,
+            "value": 0.09448818897637795
+          },
+          {
+            "number": 6,
+            "time": 7.5,
+            "value": 0.09448818897637795
+          },
+          {
+            "number": 6,
+            "time": 7.5,
+            "value": 0.09448818897637795
+          }
+        ],
+        "7": [
+          {
+            "number": 7,
+            "time": 0,
+            "value": 0.7874015748031497
+          },
+          {
+            "number": 7,
+            "time": 0,
+            "value": 0.7874015748031497
+          },
+          {
+            "number": 7,
+            "time": 0,
+            "value": 0.7874015748031497
+          },
+          {
+            "number": 7,
+            "time": 0,
+            "value": 0.7874015748031497
+          },
+          {
+            "number": 7,
+            "time": 7.5,
+            "value": 0.7874015748031497
+          },
+          {
+            "number": 7,
+            "time": 7.5,
+            "value": 0.7874015748031497
+          }
+        ],
+        "10": [
+          {
+            "number": 10,
+            "time": 0,
+            "value": 0.5039370078740157
+          },
+          {
+            "number": 10,
+            "time": 0,
+            "value": 0.5039370078740157
+          },
+          {
+            "number": 10,
+            "time": 0,
+            "value": 0.5039370078740157
+          },
+          {
+            "number": 10,
+            "time": 0,
+            "value": 0.5039370078740157
+          },
+          {
+            "number": 10,
+            "time": 7.5,
+            "value": 0.5039370078740157
+          },
+          {
+            "number": 10,
+            "time": 7.5,
+            "value": 0.5039370078740157
+          }
+        ],
+        "100": [
+          {
+            "number": 100,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 100,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 100,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 100,
+            "time": 7.5,
+            "value": 0
+          },
+          {
+            "number": 100,
+            "time": 7.5,
+            "value": 0
+          }
+        ],
+        "101": [
+          {
+            "number": 101,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 101,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 101,
+            "time": 0,
+            "value": 0
+          },
+          {
+            "number": 101,
+            "time": 7.5,
+            "value": 0
+          },
+          {
+            "number": 101,
+            "time": 7.5,
+            "value": 0
+          }
+        ]
+      },
+      "id": 2,
+      "name": "MIDI Out",
+      "channelNumber": 0,
+      "isPercussion": false
+    }
+  ]
+}
