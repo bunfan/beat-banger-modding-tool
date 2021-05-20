@@ -11,9 +11,9 @@ var section
 
 var config = ConfigFile.new()
 
-var c_octave = [48,60,72]
-var cs_octave = [49,61,73]
-var d_octave = [50,62,74]
+var c_octave = [36,48,60,72]
+var cs_octave = [37,49,61,73]
+var d_octave = [38,50,62,74]
 
 
 func _ready():
