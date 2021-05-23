@@ -27,7 +27,7 @@ Global="*res://Global.gd"
 
 [display]
 
-window/size/width=384
+window/size/width=768
 window/size/height=512
 window/size/resizable=false
 window/stretch/mode="2d"
