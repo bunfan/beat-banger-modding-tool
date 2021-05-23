@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Charter.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Transitions.gd" type="Script" id=3]
 [ext_resource path="res://img/checker.png" type="Texture" id=4]
+[ext_resource path="res://scripts/Splash.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
@@ -37,6 +38,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0823529, 0.0705882, 0.0901961, 1 )
+
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,22 +61,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameField" type="LineEdit" parent="Charter"]
-margin_left = 40.0
-margin_top = 104.0
-margin_right = 344.0
-margin_bottom = 128.0
-custom_styles/normal = SubResource( 2 )
-placeholder_text = "NAME"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="SongPathField" type="LineEdit" parent="Charter"]
-margin_left = 40.0
-margin_top = 136.0
-margin_right = 344.0
-margin_bottom = 160.0
+margin_left = 24.0
+margin_top = 72.0
+margin_right = 360.0
+margin_bottom = 96.0
 custom_styles/normal = SubResource( 2 )
 placeholder_text = "song_path.ogg"
 __meta__ = {
@@ -80,20 +73,21 @@ __meta__ = {
 }
 
 [node name="JsonPath" type="LineEdit" parent="Charter"]
-margin_left = 40.0
-margin_top = 168.0
+margin_left = 24.0
+margin_top = 136.0
 margin_right = 248.0
-margin_bottom = 200.0
+margin_bottom = 168.0
 custom_styles/read_only = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
+align = 1
 editable = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OpenJsonButton" type="Button" parent="Charter/JsonPath"]
-margin_left = 216.0
-margin_right = 304.0
+margin_left = 232.0
+margin_right = 336.0
 margin_bottom = 32.0
 text = "Open JSON"
 __meta__ = {
@@ -117,10 +111,10 @@ __meta__ = {
 }
 
 [node name="GenerateChart" type="Button" parent="Charter"]
-margin_left = 40.0
-margin_top = 208.0
-margin_right = 344.0
-margin_bottom = 240.0
+margin_left = 24.0
+margin_top = 184.0
+margin_right = 360.0
+margin_bottom = 216.0
 disabled = true
 text = "Generate Chart"
 __meta__ = {
@@ -128,10 +122,10 @@ __meta__ = {
 }
 
 [node name="OptionButton" type="OptionButton" parent="Charter"]
-margin_left = 40.0
-margin_top = 72.0
-margin_right = 344.0
-margin_bottom = 96.0
+margin_left = 24.0
+margin_top = 104.0
+margin_right = 360.0
+margin_bottom = 128.0
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 4 )
@@ -178,11 +172,12 @@ __meta__ = {
 
 [node name="ImgPath" type="LineEdit" parent="Transitions"]
 margin_left = 152.0
-margin_top = 80.0
+margin_top = 72.0
 margin_right = 360.0
-margin_bottom = 104.0
+margin_bottom = 96.0
 custom_styles/read_only = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
+align = 1
 editable = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -190,7 +185,7 @@ __meta__ = {
 
 [node name="OpenImageButton" type="Button" parent="Transitions/ImgPath"]
 margin_left = -128.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = 24.0
 text = "Load Sheet"
 __meta__ = {
@@ -215,11 +210,12 @@ __meta__ = {
 
 [node name="SfxPath" type="LineEdit" parent="Transitions"]
 margin_left = 152.0
-margin_top = 112.0
+margin_top = 104.0
 margin_right = 360.0
-margin_bottom = 136.0
+margin_bottom = 128.0
 custom_styles/read_only = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
+align = 1
 editable = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -227,7 +223,7 @@ __meta__ = {
 
 [node name="OpenSFXButton" type="Button" parent="Transitions/SfxPath"]
 margin_left = -128.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = 24.0
 text = "Load SFX"
 __meta__ = {
@@ -252,11 +248,12 @@ __meta__ = {
 
 [node name="FxImgPath" type="LineEdit" parent="Transitions"]
 margin_left = 152.0
-margin_top = 144.0
+margin_top = 136.0
 margin_right = 360.0
-margin_bottom = 168.0
+margin_bottom = 160.0
 custom_styles/read_only = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
+align = 1
 editable = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -264,7 +261,7 @@ __meta__ = {
 
 [node name="OpenFxImgButton" type="Button" parent="Transitions/FxImgPath"]
 margin_left = -128.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = 24.0
 text = "Load FX sheet"
 __meta__ = {
@@ -288,12 +285,12 @@ __meta__ = {
 }
 
 [node name="Bg" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 192 )
+position = Vector2( 24, 216 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="Preview" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 192 )
+position = Vector2( 24, 216 )
 centered = false
 hframes = 3
 vframes = 2
@@ -303,13 +300,90 @@ anims/Loop = SubResource( 6 )
 
 [node name="PlayStop" type="Button" parent="Transitions"]
 margin_left = 192.0
-margin_top = 192.0
+margin_top = 216.0
 margin_right = 360.0
-margin_bottom = 224.0
+margin_bottom = 248.0
 text = "Play / Stop"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LoopOption" type="OptionButton" parent="Transitions"]
+margin_left = 24.0
+margin_top = 168.0
+margin_right = 360.0
+margin_bottom = 192.0
+text = "Looping Option"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddTransition" type="Button" parent="Transitions"]
+margin_left = 24.0
+margin_top = 432.0
+margin_right = 368.0
+margin_bottom = 496.0
+disabled = true
+text = "Add Transition"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SplashBG" type="ColorRect" parent="Splash"]
+margin_right = 768.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 0.701961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Splash"]
+margin_left = 184.0
+margin_top = 144.0
+margin_right = 584.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Splash/Panel"]
+margin_left = 96.0
+margin_top = 48.0
+margin_right = 304.0
+margin_bottom = 62.0
+text = "Beat Banger Modding Tool v 1.0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModName" type="LineEdit" parent="Splash/Panel"]
+margin_left = 80.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+custom_styles/normal = SubResource( 7 )
+align = 1
+placeholder_text = "Enter Mod Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Splash/Panel"]
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 320.0
+margin_bottom = 156.0
+text = "Create"
 
 [connection signal="button_up" from="Charter/JsonPath/OpenJsonButton" to="." method="json_popup"]
 [connection signal="file_selected" from="Charter/JsonPath/JsonFileDialog" to="." method="on_json_selected"]
@@ -321,3 +395,4 @@ __meta__ = {
 [connection signal="button_up" from="Transitions/FxImgPath/OpenFxImgButton" to="." method="fx_img_popup"]
 [connection signal="file_selected" from="Transitions/FxImgPath/FxImgFileDialog" to="." method="on_fx_img_file_selected"]
 [connection signal="button_up" from="Transitions/PlayStop" to="Transitions" method="_on_PlayStop_button_up"]
+[connection signal="button_up" from="Splash/Panel/Button" to="Splash" method="_on_splash_button_up"]

@@ -64,41 +64,57 @@ func create_chart(midi):
 			print("appended %s to No Spawn" % beat)
 
 	export_chart()
+	
 
 func export_chart():
-	section = $OptionButton.get_item_text($OptionButton.selected)
 
-	config.set_value(section, "name", $NameField.text)
-	config.set_value(section, "song_path", $SongPathField.text)
-	config.set_value(section, "loop_speed", 1)
-	config.set_value(section, "music_volume", -3)
-	config.set_value(section, "sfx_volume", 0)
-	config.set_value(section, "bpm", bpm)
-	config.set_value(section, "no_spawn", [0])
-	config.set_value(section, "half_spawn", half_spawn)
-	config.set_value(section, "quarter_spawn", quarter_spawn)
-	config.set_value(section, "eighth_spawn", eighth_spawn)
-	config.set_value(section, "initial_data", {
-		"note_type": 1,
-		"animation": null,
-		"sound": null,
-		"effects": null,
-		"looping": true
-	})
-	config.set_value(section, "transitions", {
-		0:{
+	var dir = Directory.new()
+	if dir.open(Global.save_dir) == OK:
+		if !Global.chart_name: return OS.alert("Enter a name for the mod")
+
+		# Chart Dir
+		var chart_dir = Global.save_dir + Global.chart_name
+
+		# Copy Files
+		
+		if !Global.sprite_sheet_name.is_valid_filename(): return print("No Image Selected")
+
+		var copy_dir = Directory.new()
+		if copy_dir.open(chart_dir + "/anims") == OK:
+			copy_dir.copy(Global.sprite_sheet_file_path, chart_dir + "/anims/" + Global.sprite_sheet_name)
+				
+		section = $OptionButton.get_item_text($OptionButton.selected)
+
+		config.set_value(section, "name", Global.chart_name)
+		config.set_value(section, "song_path", $SongPathField.text)
+		config.set_value(section, "loop_speed", 1)
+		config.set_value(section, "music_volume", -3)
+		config.set_value(section, "sfx_volume", 0)
+		config.set_value(section, "bpm", bpm)
+		config.set_value(section, "no_spawn", [0])
+		config.set_value(section, "half_spawn", half_spawn)
+		config.set_value(section, "quarter_spawn", quarter_spawn)
+		config.set_value(section, "eighth_spawn", eighth_spawn)
+		config.set_value(section, "initial_data", {
+			"note_type": 1,
 			"animation": null,
 			"sound": null,
 			"effects": null,
-			"looping": false
-			}
+			"looping": true
 		})
-	config.set_value(section, "lastBeat", [0])
-	config.save("user://chart.cfg")
+		config.set_value(section, "transitions", {
+			0:{
+				"animation": null,
+				"sound": null,
+				"effects": null,
+				"looping": false
+				}
+			})
+		config.set_value(section, "lastBeat", [0])
+		config.save(Global.save_dir + Global.chart_name + "/chart.cfg")
 
-	OS.alert("Chart Successfully Generated", "Notice")
-	if OS.shell_open(ProjectSettings.globalize_path("user://chart.cfg")) == OK:
-		pass
+		if OS.shell_open(ProjectSettings.globalize_path(Global.save_dir + Global.chart_name)) == OK:
+			pass
 
 
 
