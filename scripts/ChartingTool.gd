@@ -69,10 +69,10 @@ func export_chart():
 	section = $OptionButton.get_item_text($OptionButton.selected)
 
 	config.set_value(section, "name", $NameField.text)
-	config.set_value(section, "song_path", "")
+	config.set_value(section, "song_path", $SongPathField.text)
 	config.set_value(section, "loop_speed", 1)
 	config.set_value(section, "music_volume", -3)
-	config.set_value(section, "foley_volume", 0)
+	config.set_value(section, "sfx_volume", 0)
 	config.set_value(section, "bpm", bpm)
 	config.set_value(section, "no_spawn", [0])
 	config.set_value(section, "half_spawn", half_spawn)
