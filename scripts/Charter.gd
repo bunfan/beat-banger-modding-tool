@@ -1,7 +1,5 @@
 extends Control
 
-var bpm: float
-
 var no_spawn = []
 var half_spawn = []
 var quarter_spawn = []
@@ -28,7 +26,7 @@ func on_generate():
 	
 func load_json():
 	var file = File.new()
-	if file.open(Global.json_file, File.READ) == OK:
+	if file.open(Global.json_file_path, File.READ) == OK:
 		var text: String = file.get_as_text()
 		var data = JSON.parse(text)
 		var midi = data.result
@@ -37,11 +35,11 @@ func load_json():
 
 func create_chart(midi):
 
-	bpm = midi["header"]["bpm"]
+	# bpm = midi["header"]["bpm"]
 	# var time_sig = midi["header"]["timeSignature"]
 	var notes = midi["tracks"][2]["notes"]
 
-	print(bpm)
+	print(Global.bpm)
 
 	half_spawn = []
 	quarter_spawn = []
@@ -49,7 +47,7 @@ func create_chart(midi):
 
 	for note in notes:
 		var midi_num = int(note["midi"])
-		var beat = int(floor(float(note["time"]*2) / (60/bpm)))
+		var beat = int(floor(float(note["time"]*2) / (60/Global.bpm)))
 		if c_octave.has(midi_num):
 			half_spawn.append(beat)
 			print("appended %s to Half" % beat)
@@ -75,22 +73,17 @@ func export_chart():
 		# Chart Dir
 		var chart_dir = Global.save_dir + Global.chart_name
 
-		# Copy Files
-		
-		if !Global.sprite_sheet_name.is_valid_filename(): return print("No Image Selected")
-
-		var copy_dir = Directory.new()
-		if copy_dir.open(chart_dir + "/anims") == OK:
-			copy_dir.copy(Global.sprite_sheet_file_path, chart_dir + "/anims/" + Global.sprite_sheet_name)
-				
+		# Copy song
+		Func.copy_to_files(Global.song_file_path, Global.song_file_name, "/songs/")
+					
 		section = $OptionButton.get_item_text($OptionButton.selected)
 
 		config.set_value(section, "name", Global.chart_name)
-		config.set_value(section, "song_path", $SongPathField.text)
+		config.set_value(section, "song_path", Global.song_file_name)
 		config.set_value(section, "loop_speed", 1)
-		config.set_value(section, "music_volume", -3)
-		config.set_value(section, "sfx_volume", 0)
-		config.set_value(section, "bpm", bpm)
+		config.set_value(section, "music_volume", Global.music_volume)
+		config.set_value(section, "sfx_volume", Global.sfx_volume)
+		config.set_value(section, "bpm", Global.bpm)
 		config.set_value(section, "no_spawn", [0])
 		config.set_value(section, "half_spawn", half_spawn)
 		config.set_value(section, "quarter_spawn", quarter_spawn)
@@ -102,18 +95,12 @@ func export_chart():
 			"effects": null,
 			"looping": true
 		})
-		config.set_value(section, "transitions", {
-			0:{
-				"animation": null,
-				"sound": null,
-				"effects": null,
-				"looping": false
-				}
-			})
+		config.set_value(section, "transitions", Global.transition_dict)
 		config.set_value(section, "lastBeat", [0])
-		config.save(Global.save_dir + Global.chart_name + "/chart.cfg")
+		config.save(chart_dir + "/chart.cfg")
 
-		if OS.shell_open(ProjectSettings.globalize_path(Global.save_dir + Global.chart_name)) == OK:
+		OS.alert("Generation Successful", "Notice")
+		if OS.shell_open(ProjectSettings.globalize_path(chart_dir)) == OK:
 			pass
 
 

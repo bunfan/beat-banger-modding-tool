@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/loop2.png-e01e57f084f30c83d5e9c96a300a88db.stex"
+path="res://.import/bra_rip.png-b5c1b6cb9b1ff3b51ef3ca20d1f2f9a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/loop2.png"
-dest_files=[ "res://.import/loop2.png-e01e57f084f30c83d5e9c96a300a88db.stex" ]
+source_file="res://data/bra_rip.png"
+dest_files=[ "res://.import/bra_rip.png-b5c1b6cb9b1ff3b51ef3ca20d1f2f9a8.stex" ]
 
 [params]
 
