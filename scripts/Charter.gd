@@ -9,6 +9,7 @@ var section
 
 var config = ConfigFile.new()
 
+var b_octave = [35,47,59,71]
 var c_octave = [36,48,60,72]
 var cs_octave = [37,49,61,73]
 var d_octave = [38,50,62,74]
@@ -57,7 +58,7 @@ func create_chart(midi):
 		elif d_octave.has(midi_num):
 			eighth_spawn.append(beat)
 			print("appended %s to Eighth" % beat)
-		else:
+		elif b_octave.has(midi_num):
 			no_spawn.append(beat)
 			print("appended %s to No Spawn" % beat)
 
@@ -75,26 +76,21 @@ func export_chart():
 
 		# Copy song
 		Func.copy_to_files(Global.song_file_path, Global.song_file_name, "/songs/")
+		Func.copy_to_files(Global.pattern_file_path, Global.pattern_file_name, "/textures/")
 					
 		section = $OptionButton.get_item_text($OptionButton.selected)
 
 		config.set_value(section, "name", Global.chart_name)
 		config.set_value(section, "song_path", Global.song_file_name)
-		config.set_value(section, "loop_speed", 1)
+		config.set_value(section, "loop_speed", Global.loop_speed)
 		config.set_value(section, "music_volume", Global.music_volume)
 		config.set_value(section, "sfx_volume", Global.sfx_volume)
 		config.set_value(section, "bpm", Global.bpm)
-		config.set_value(section, "no_spawn", [0])
+		config.set_value(section, "no_spawn", no_spawn)
 		config.set_value(section, "half_spawn", half_spawn)
 		config.set_value(section, "quarter_spawn", quarter_spawn)
 		config.set_value(section, "eighth_spawn", eighth_spawn)
-		config.set_value(section, "initial_data", {
-			"note_type": 1,
-			"animation": null,
-			"sound": null,
-			"effects": null,
-			"looping": true
-		})
+		config.set_value(section, "initial_data", Global.initial_data)
 		config.set_value(section, "transitions", Global.transition_dict)
 		config.set_value(section, "lastBeat", [0])
 		config.save(chart_dir + "/chart.cfg")

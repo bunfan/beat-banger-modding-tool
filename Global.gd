@@ -1,6 +1,6 @@
 extends Node
 
-var save_dir = "user://"
+var save_dir = OS.get_executable_path().get_base_dir() + "/"
 
 # Tool Vars
 
@@ -11,7 +11,9 @@ var loop_speed := 1.0
 
 var music_volume := 0
 var sfx_volume := 0
-var current_beat
+var current_beat = 0
+
+var popup_file_path: String
 
 # File Data
 
@@ -22,6 +24,9 @@ var json_file_name : String
 
 var song_file_path : String
 var song_file_name : String
+
+var pattern_file_path : String
+var pattern_file_name : String
 
 var sprite_sheet_file_path : String
 var sprite_sheet_name : String
@@ -39,3 +44,4 @@ var no_input_looping : bool
 # Transitions
 
 var transition_dict : Dictionary
+var initial_data : Dictionary

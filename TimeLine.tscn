@@ -80,7 +80,7 @@ margin_bottom = 120.0
 custom_styles/read_only = ExtResource( 6 )
 align = 1
 editable = false
-placeholder_text = "Null"
+placeholder_text = "Song File (OGG)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -119,7 +119,7 @@ custom_styles/read_only = ExtResource( 6 )
 custom_styles/normal = SubResource( 2 )
 align = 1
 editable = false
-placeholder_text = "Null"
+placeholder_text = "Chart File (JSON)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -143,6 +143,45 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.json ; JSON" )
+current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
+current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PatternPath" type="LineEdit" parent="Charter"]
+margin_left = 24.0
+margin_top = 160.0
+margin_right = 248.0
+margin_bottom = 184.0
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/normal = SubResource( 2 )
+align = 1
+editable = false
+placeholder_text = " 256px Background Pattern (PNG)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenPatternButton" type="Button" parent="Charter/PatternPath"]
+margin_left = 232.0
+margin_right = 336.0
+margin_bottom = 24.0
+text = "Load Pattern"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PatternFileDialog" type="FileDialog" parent="Charter/PatternPath"]
+margin_left = 376.0
+margin_top = -64.0
+margin_right = 720.0
+margin_bottom = 296.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png ; PNG" )
 current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
 current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
 __meta__ = {
@@ -188,11 +227,12 @@ __meta__ = {
 
 [node name="Bpm" type="Panel" parent="Charter"]
 margin_left = 24.0
-margin_top = 160.0
+margin_top = 192.0
 margin_right = 360.0
-margin_bottom = 184.0
+margin_bottom = 216.0
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -212,12 +252,13 @@ text = "BPM"
 
 [node name="CurrentBeat" type="Panel" parent="Charter"]
 margin_left = 24.0
-margin_top = 193.0
+margin_top = 224.0
 margin_right = 360.0
-margin_bottom = 217.0
+margin_bottom = 248.0
 custom_styles/panel = SubResource( 4 )
 script = ExtResource( 9 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -263,11 +304,11 @@ __meta__ = {
 
 [node name="MusicVolume" type="HSlider" parent="Transitions"]
 margin_left = 192.0
-margin_top = 224.0
-margin_right = 376.0
-margin_bottom = 248.0
-min_value = -6.0
-max_value = 6.0
+margin_top = 216.0
+margin_right = 360.0
+margin_bottom = 240.0
+min_value = -12.0
+max_value = 12.0
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -278,14 +319,17 @@ margin_top = -8.0
 margin_right = 122.0
 margin_bottom = 6.0
 text = "Music Volume : 0db"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SfxVolume" type="HSlider" parent="Transitions"]
 margin_left = 192.0
-margin_top = 264.0
-margin_right = 376.0
-margin_bottom = 288.0
-min_value = -6.0
-max_value = 6.0
+margin_top = 256.0
+margin_right = 360.0
+margin_bottom = 280.0
+min_value = -12.0
+max_value = 12.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -296,6 +340,27 @@ margin_top = -8.0
 margin_right = 122.0
 margin_bottom = 6.0
 text = "SFX Volume : 0db"
+
+[node name="SpinBox" type="SpinBox" parent="Transitions"]
+margin_left = 192.0
+margin_top = 304.0
+margin_right = 360.0
+margin_bottom = 328.0
+step = 0.1
+value = 1.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Transitions/SpinBox"]
+margin_top = -16.0
+margin_right = 122.0
+margin_bottom = -2.0
+text = "Animation Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ImgPath" type="LineEdit" parent="Transitions"]
 margin_left = 152.0
@@ -445,12 +510,12 @@ __meta__ = {
 }
 
 [node name="Bg" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 216 )
+position = Vector2( 24, 208 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="Preview" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 216 )
+position = Vector2( 24, 208 )
 centered = false
 hframes = 3
 vframes = 2
@@ -461,12 +526,22 @@ anims/Loop = SubResource( 7 )
 [node name="PreviewSFX" type="AudioStreamPlayer" parent="Transitions/Preview"]
 bus = "SFX"
 
-[node name="PlayStop" type="Button" parent="Transitions"]
+[node name="PlayPause" type="Button" parent="Transitions"]
 margin_left = 408.0
+margin_top = 424.0
+margin_right = 568.0
+margin_bottom = 456.0
+text = "Play / Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stop" type="Button" parent="Transitions"]
+margin_left = 584.0
 margin_top = 424.0
 margin_right = 744.0
 margin_bottom = 456.0
-text = "Preview"
+text = "Stop / Reset"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -483,7 +558,7 @@ __meta__ = {
 
 [node name="AddTransition" type="Button" parent="Transitions"]
 margin_left = 24.0
-margin_top = 432.0
+margin_top = 424.0
 margin_right = 368.0
 margin_bottom = 496.0
 disabled = true
@@ -495,7 +570,7 @@ __meta__ = {
 
 [node name="TransitionList" type="ItemList" parent="Transitions"]
 margin_left = 408.0
-margin_top = 264.0
+margin_top = 256.0
 margin_right = 744.0
 margin_bottom = 416.0
 custom_styles/bg = SubResource( 8 )
@@ -567,10 +642,13 @@ script = ExtResource( 10 )
 [connection signal="file_selected" from="Charter/SongPathField/SongFileDialog" to="." method="on_song_selected"]
 [connection signal="button_up" from="Charter/JsonPath/OpenJsonButton" to="." method="json_popup"]
 [connection signal="file_selected" from="Charter/JsonPath/JsonFileDialog" to="." method="on_json_selected"]
+[connection signal="button_up" from="Charter/PatternPath/OpenPatternButton" to="." method="pattern_popup"]
+[connection signal="file_selected" from="Charter/PatternPath/PatternFileDialog" to="." method="on_pattern_selected"]
 [connection signal="button_up" from="Charter/GenerateChart" to="Charter" method="on_generate"]
 [connection signal="preview" from="Transitions" to="Conductor" method="_on_preview"]
 [connection signal="value_changed" from="Transitions/MusicVolume" to="Transitions/MusicVolume" method="_on_MusicVolume_changed"]
 [connection signal="value_changed" from="Transitions/SfxVolume" to="Transitions/SfxVolume" method="_on_SfxVolume_changed"]
+[connection signal="value_changed" from="Transitions/SpinBox" to="Transitions" method="_on_LoopSpeed_changed"]
 [connection signal="button_up" from="Transitions/ImgPath/OpenImageButton" to="." method="sprite_sheet_popup"]
 [connection signal="file_selected" from="Transitions/ImgPath/ImgFileDialog" to="." method="on_img_file_selected"]
 [connection signal="button_up" from="Transitions/ImgPath/ButtonImageClear" to="." method="_on_ButtonImageClear"]
@@ -580,9 +658,11 @@ script = ExtResource( 10 )
 [connection signal="button_up" from="Transitions/FxImgPath/OpenFxImgButton" to="." method="fx_img_popup"]
 [connection signal="file_selected" from="Transitions/FxImgPath/FxImgFileDialog" to="." method="on_fx_img_path_selected"]
 [connection signal="button_up" from="Transitions/FxImgPath/ButtonFxImgClear" to="." method="_on_ButtonFxImgClear"]
-[connection signal="button_up" from="Transitions/PlayStop" to="Transitions" method="_on_PlayStop_button_up"]
+[connection signal="button_up" from="Transitions/PlayPause" to="Transitions" method="_on_PlayStop_button_up"]
+[connection signal="button_up" from="Transitions/Stop" to="Conductor" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Transitions/Stop" to="Transitions" method="_on_Stop_button_up"]
 [connection signal="item_selected" from="Transitions/LoopOption" to="Transitions" method="on_LoopOption_selected"]
 [connection signal="button_up" from="Transitions/AddTransition" to="Transitions" method="_on_AddTransition"]
 [connection signal="button_up" from="Splash/Panel/Button" to="Splash" method="_on_splash_button_up"]
-[connection signal="beat" from="Conductor" to="Transitions" method="_on_Conductor_beat"]
 [connection signal="beat" from="Conductor" to="Charter/CurrentBeat" method="_on_Conductor_beat"]
+[connection signal="beat" from="Conductor" to="Transitions" method="_on_Conductor_beat"]

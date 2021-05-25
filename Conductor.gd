@@ -7,18 +7,27 @@ signal beat(half_beat)
 
 func _on_preview(value):
 	if value == true:
-		last_half_beat = 0
-		emit_signal("beat", last_half_beat)
-		stream = Func.load_ogg(Global.song_file_path)
-		play()
+		
+		if playing:
+			set_stream_paused(false)
+		else:
+			last_half_beat = 0
+			emit_signal("beat", last_half_beat)
+			play()
+	
 		print("Playing Preview")
 		Global.previewing = true
 	else:
-		stop()
-		print("Stopping Preview")
+		set_stream_paused(true)
+		print("Pausing Preview")
 		Global.previewing = false
 
-
+func _on_Stop_button_up():
+	set_stream_paused(false)
+	print("Stopping Preview")
+	emit_signal("beat", 0)
+	Global.previewing = false
+	stop()
 
 func _process(_delta):
 	if playing: 

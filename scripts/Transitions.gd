@@ -23,7 +23,14 @@ func _on_PlayStop_button_up():
 		emit_signal("preview", true)
 		$Preview/Anim.playback_speed = Global.loop_speed * 2
 		$Preview/Anim.play("Loop")
+
+func _on_Stop_button_up():
+	emit_signal("preview", false)
+	$Preview/Anim.stop()
 		
+func _on_LoopSpeed_changed(value):
+	Global.loop_speed = value
+	$Preview/Anim.playback_speed = Global.loop_speed * 2
 		
 func _on_Conductor_beat(half_beat):
 	if half_beat % 2 == 0:
@@ -34,19 +41,32 @@ func _on_Conductor_beat(half_beat):
 
 func _on_AddTransition():
 
-	$TransitionList.add_item("Transition to %s on Beat %s" % [Global.sprite_sheet_name, Global.current_beat])
+	if Global.current_beat == 0:
+		$TransitionList.add_item("Set Starting Animatiom to %s" % [Global.sprite_sheet_name])
 
-	# Create Transition Object
-	
-	var transition_object = {
-		"animation": Global.sprite_sheet_name,
-		"effects": Global.fx_img_name,
-		"looping": Global.no_input_looping,
-		"sound": Global.sfx_file_name
-	}
+		Global.initial_data = {
+			"animation": Global.sprite_sheet_name,
+			"effects": Global.fx_img_name,
+			"looping": Global.no_input_looping,
+			"sound": Global.sfx_file_name,
+			"note_type": 1
+		}	
 
-	Global.transition_dict[Global.current_beat] = transition_object
-	print(Global.transition_dict)
+	else:
+
+		$TransitionList.add_item("Transition to %s on Beat %s" % [Global.sprite_sheet_name, Global.current_beat])
+
+		# Create Transition Object
+		
+		var transition_object = {
+			"animation": Global.sprite_sheet_name,
+			"effects": Global.fx_img_name,
+			"looping": Global.no_input_looping,
+			"sound": Global.sfx_file_name
+		}
+
+		Global.transition_dict[Global.current_beat] = transition_object
+		print(Global.transition_dict)
 
 	# Check image loaded
 	if !Global.sprite_sheet_name.is_valid_filename(): return print("No Image Selected")
