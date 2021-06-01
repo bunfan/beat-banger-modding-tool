@@ -8,36 +8,10 @@ var cur_frame: int
 
 func on_LoopOption_selected(index):
 	Global.no_input_looping = bool(index)
-		
-signal preview(value)
-func _on_PlayStop_button_up():
 
-	if !Global.sprite_sheet_file_path: return print("No Animation Loaded")
-	if !Global.song_file_name: return print("No Song Loaded")
-	if !Global.json_file_name: return print("No Chart Loaded")
+func _on_screen_flash_toggled(value):
+	Global.screen_flash = value
 
-	if $Preview/Anim.current_animation == "Loop":
-		emit_signal("preview", false)
-		$Preview/Anim.stop()
-	else:
-		emit_signal("preview", true)
-		$Preview/Anim.playback_speed = Global.loop_speed * 2
-		$Preview/Anim.play("Loop")
-
-func _on_Stop_button_up():
-	emit_signal("preview", false)
-	$Preview/Anim.stop()
-		
-func _on_LoopSpeed_changed(value):
-	Global.loop_speed = value
-	$Preview/Anim.playback_speed = Global.loop_speed * 2
-		
-func _on_Conductor_beat(half_beat):
-	if half_beat % 2 == 0:
-		$Preview/Anim.stop()
-		$Preview/Anim.play("Loop")
-		$Preview/PreviewSFX.play()
-	
 
 func _on_AddTransition():
 
@@ -46,9 +20,8 @@ func _on_AddTransition():
 
 		Global.initial_data = {
 			"animation": Global.sprite_sheet_name,
-			"effects": Global.fx_img_name,
 			"looping": Global.no_input_looping,
-			"sound": Global.sfx_file_name,
+			"sound_fx": Global.sfx_file_name,
 			"note_type": 1
 		}	
 
@@ -62,17 +35,19 @@ func _on_AddTransition():
 			"animation": Global.sprite_sheet_name,
 			"effects": Global.fx_img_name,
 			"looping": Global.no_input_looping,
-			"sound": Global.sfx_file_name
+			"sound_fx": Global.sfx_file_name,
+			"transition_sound": Global.transition_sfx_file_name
 		}
 
 		Global.transition_dict[Global.current_beat] = transition_object
-		print(Global.transition_dict)
+		Global.last_beat = Global.transition_dict.keys().back()
 
 	# Check image loaded
 	if !Global.sprite_sheet_name.is_valid_filename(): return print("No Image Selected")
 		
 	# Copy files
 	Func.copy_to_files(Global.sprite_sheet_file_path, Global.sprite_sheet_name, "/anims/")
+	Func.copy_to_files(Global.transition_sfx_file_path, Global.transition_sfx_file_name, "/sfx/")
 	Func.copy_to_files(Global.sfx_file_path, Global.sfx_file_name, "/sfx/")
 	Func.copy_to_files(Global.fx_img_path, Global.fx_img_name, "/anims/fx/")
 

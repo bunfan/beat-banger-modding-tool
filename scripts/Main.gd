@@ -1,9 +1,15 @@
 extends Control
 
 func _ready():
-	print(Global.save_dir)
+	Global.save_dir = "user://" if OS.is_debug_build() == true else Global.exe_path
+	$Splash/Panel/Dir.text = Global.save_dir
 	$Splash.visible = true
 
+func _input(event):
+	if !event is InputEventKey: return
+	if event.is_action_pressed("Fullscreen"):
+		OS.set_window_fullscreen(!OS.is_window_fullscreen())
+	
 # Song OGG
 
 func song_popup():
@@ -77,20 +83,16 @@ func on_img_file_selected(path):
 	tex.create_from_image(img)
 	# $Transitions/Preview.hframes = 3
 	# $Transitions/Preview.vframes = 2
-	$Transitions/Preview.scale = Vector2(0.25,0.25)
-	$Transitions/Preview.texture = tex
+	$Preview/Preview.scale = Vector2(0.373,0.37)
+	$Preview/Preview.texture = tex
 
 func _on_ButtonImageClear():
 	Global.sprite_sheet_file_path = ""
 	Global.sprite_sheet_name = ""
 	$Transitions/ImgPath.text = ""
-	$Transitions/Preview.texture = null
-	$Transitions/Preview/Anim.stop()
+	$Preview/Preview.texture = null
+	$Preview/Preview/Anim.stop()
 	Global.previewing = false
-
-
-
-
 
 #  SFX
 
@@ -105,17 +107,13 @@ func on_sfx_file_path_selected(path):
 	Global.popup_file_path = $Transitions/SfxPath/SfxFileDialog.current_path
 	$Transitions/SfxPath.text = Global.sfx_file_name
 	print("loaded %s" % path)
-	$Transitions/Preview/PreviewSFX.stream = Func.load_ogg(path)
+	$Preview/Preview/PreviewSFX.stream = Func.load_ogg(path)
 
 func _on_ButtonSfxClear():
 	Global.sfx_file_path = ""
 	Global.sfx_file_name = ""
 	$Transitions/SfxPath.text = ""
-	$Transitions/Preview/PreviewSFX.stream = null
-
-
-
-
+	$Preview/Preview/PreviewSFX.stream = null
 
 # FX Layer Sheet
 
@@ -136,4 +134,35 @@ func _on_ButtonFxImgClear():
 	Global.fx_img_name = ""
 	$Transitions/FxImgPath.text = ""
 
+# Transition SFX
 
+func transition_sfx_popup():
+	$Transitions/TransitionSfxPath/TransitionSfxFileDialog.current_path = Global.popup_file_path
+	$Transitions/TransitionSfxPath/TransitionSfxFileDialog.popup()
+
+
+func on_transition_sfx_path_selected(path):
+	Global.transition_sfx_file_path = path
+	Global.transition_sfx_file_name = $Transitions/TransitionSfxPath/TransitionSfxFileDialog.current_file
+	Global.popup_file_path = $Transitions/TransitionSfxPath/TransitionSfxFileDialog.current_path
+	$Transitions/TransitionSfxPath.text = Global.transition_sfx_file_name
+	print("loaded %s" % path)
+
+
+func _on_transition_sfx_clear():
+	Global.transition_sfx_file_path = ""
+	Global.transition_sfx_file_name = ""
+	$Transitions/TransitionSfxPath.text = ""
+
+# Game Over
+
+func game_over_sfx_popup():
+	$Charter/GameOverSfxPath/GameOverSfxFileDialog.current_path = Global.popup_file_path
+	$Charter/GameOverSfxPath/GameOverSfxFileDialog.popup()
+
+func on_game_over_path_selected(path):
+	Global.games_over_sfx_path = path
+	Global.game_over_sfx_name = $Charter/GameOverSfxPath/GameOverSfxFileDialog.current_file
+	Global.popup_file_path = $Charter/GameOverSfxPath/GameOverSfxFileDialog.current_path
+	$Charter/GameOverSfxPath.text = Global.game_over_sfx_name
+	print("loaded %s" % path)

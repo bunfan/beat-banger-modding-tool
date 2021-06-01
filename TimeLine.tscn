@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Charter.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Conductor.gd" type="Script" id=10]
 [ext_resource path="res://scripts/Data_Gathering/MusicVolume.gd" type="Script" id=11]
 [ext_resource path="res://scripts/Data_Gathering/SfxVolume.gd" type="Script" id=12]
+[ext_resource path="res://scripts/Preview.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
@@ -20,18 +21,21 @@ bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
 bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.0392157, 0.0352941, 0.0431373, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.054902, 0.0509804, 0.0627451, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.815686, 0.223529, 0.223529, 1 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.145098, 0.12549, 0.156863, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
+
+[sub_resource type="Animation" id=8]
 step = 0.166667
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -45,9 +49,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.145098, 0.12549, 0.156863, 1 )
 
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.0823529, 0.0705882, 0.0901961, 1 )
@@ -64,7 +65,7 @@ __meta__ = {
 [node name="Charter" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.016
-margin_left = 384.0
+margin_left = 640.0
 margin_bottom = -0.0640259
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
@@ -74,9 +75,9 @@ __meta__ = {
 
 [node name="SongPathField" type="LineEdit" parent="Charter"]
 margin_left = 24.0
-margin_top = 96.0
-margin_right = 248.0
-margin_bottom = 120.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 88.0
 custom_styles/read_only = ExtResource( 6 )
 align = 1
 editable = false
@@ -86,7 +87,7 @@ __meta__ = {
 }
 
 [node name="OpenSongButton" type="Button" parent="Charter/SongPathField"]
-margin_left = 232.0
+margin_left = 216.0
 margin_right = 336.0
 margin_bottom = 24.0
 text = "Load Song"
@@ -112,9 +113,9 @@ __meta__ = {
 
 [node name="JsonPath" type="LineEdit" parent="Charter"]
 margin_left = 24.0
-margin_top = 128.0
-margin_right = 248.0
-margin_bottom = 152.0
+margin_top = 96.0
+margin_right = 232.0
+margin_bottom = 120.0
 custom_styles/read_only = ExtResource( 6 )
 custom_styles/normal = SubResource( 2 )
 align = 1
@@ -125,7 +126,7 @@ __meta__ = {
 }
 
 [node name="OpenJsonButton" type="Button" parent="Charter/JsonPath"]
-margin_left = 232.0
+margin_left = 216.0
 margin_right = 336.0
 margin_bottom = 24.0
 text = "Load JSON"
@@ -151,20 +152,20 @@ __meta__ = {
 
 [node name="PatternPath" type="LineEdit" parent="Charter"]
 margin_left = 24.0
-margin_top = 160.0
-margin_right = 248.0
-margin_bottom = 184.0
+margin_top = 128.0
+margin_right = 232.0
+margin_bottom = 152.0
 custom_styles/read_only = ExtResource( 6 )
 custom_styles/normal = SubResource( 2 )
 align = 1
 editable = false
-placeholder_text = " 256px Background Pattern (PNG)"
+placeholder_text = " 256px Background Pattern"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OpenPatternButton" type="Button" parent="Charter/PatternPath"]
-margin_left = 232.0
+margin_left = 216.0
 margin_right = 336.0
 margin_bottom = 24.0
 text = "Load Pattern"
@@ -188,6 +189,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOverSfxPath" type="LineEdit" parent="Charter"]
+margin_left = 24.0
+margin_top = 160.0
+margin_right = 232.0
+margin_bottom = 184.0
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/normal = SubResource( 2 )
+align = 1
+editable = false
+placeholder_text = "Game Over Sound"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenGameOverSfxButton" type="Button" parent="Charter/GameOverSfxPath"]
+margin_left = 216.0
+margin_right = 337.0
+margin_bottom = 24.0
+text = "Load OGG"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverSfxFileDialog" type="FileDialog" parent="Charter/GameOverSfxPath"]
+margin_left = -48.0
+margin_top = -24.0
+margin_right = 267.0
+margin_bottom = 280.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.ogg ; OGG" )
+current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
+current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GenerateChart" type="Button" parent="Charter"]
 margin_left = 24.0
 margin_top = 464.0
@@ -196,18 +236,6 @@ margin_bottom = 496.0
 disabled = true
 text = "Generate Chart"
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OptionButton" type="OptionButton" parent="Charter"]
-margin_left = 24.0
-margin_top = 64.0
-margin_right = 360.0
-margin_bottom = 88.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -227,10 +255,10 @@ __meta__ = {
 
 [node name="Bpm" type="Panel" parent="Charter"]
 margin_left = 24.0
-margin_top = 192.0
+margin_top = 224.0
 margin_right = 360.0
-margin_bottom = 216.0
-custom_styles/panel = SubResource( 4 )
+margin_bottom = 248.0
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -252,10 +280,10 @@ text = "BPM"
 
 [node name="CurrentBeat" type="Panel" parent="Charter"]
 margin_left = 24.0
-margin_top = 224.0
+margin_top = 256.0
 margin_right = 360.0
-margin_bottom = 248.0
-custom_styles/panel = SubResource( 4 )
+margin_bottom = 280.0
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true,
@@ -278,12 +306,35 @@ margin_right = 208.0
 margin_bottom = 19.0
 text = "Current Beat"
 
+[node name="PostSongDelay" type="SpinBox" parent="Charter"]
+margin_left = 176.0
+margin_top = 192.0
+margin_right = 360.0
+margin_bottom = 216.0
+step = 0.1
+value = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Charter/PostSongDelay"]
+margin_left = -152.0
+margin_right = -11.0
+margin_bottom = 24.0
+text = "Post song delay (secs)"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Transitions" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.016
+margin_left = 256.0
 margin_right = -384.0
 margin_bottom = -0.0640259
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 4 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -303,10 +354,10 @@ __meta__ = {
 }
 
 [node name="MusicVolume" type="HSlider" parent="Transitions"]
-margin_left = 192.0
-margin_top = 216.0
-margin_right = 360.0
-margin_bottom = 240.0
+margin_left = 24.0
+margin_top = 248.0
+margin_right = 192.0
+margin_bottom = 272.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 11 )
@@ -324,10 +375,10 @@ __meta__ = {
 }
 
 [node name="SfxVolume" type="HSlider" parent="Transitions"]
-margin_left = 192.0
-margin_top = 256.0
-margin_right = 360.0
-margin_bottom = 280.0
+margin_left = 24.0
+margin_top = 288.0
+margin_right = 192.0
+margin_bottom = 312.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 12 )
@@ -342,10 +393,10 @@ margin_bottom = 6.0
 text = "SFX Volume : 0db"
 
 [node name="SpinBox" type="SpinBox" parent="Transitions"]
-margin_left = 192.0
-margin_top = 304.0
-margin_right = 360.0
-margin_bottom = 328.0
+margin_left = 24.0
+margin_top = 336.0
+margin_right = 192.0
+margin_bottom = 360.0
 step = 0.1
 value = 1.0
 align = 1
@@ -380,7 +431,7 @@ __meta__ = {
 margin_left = -128.0
 margin_right = -8.0
 margin_bottom = 24.0
-text = "Load Sheet"
+text = "Sprite Sheet"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -405,13 +456,13 @@ __meta__ = {
 margin_left = 184.0
 margin_right = 208.0
 margin_bottom = 24.0
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
 text = "Ø"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SfxPath" type="LineEdit" parent="Transitions"]
+[node name="FxImgPath" type="LineEdit" parent="Transitions"]
 margin_left = 152.0
 margin_top = 104.0
 margin_right = 328.0
@@ -425,60 +476,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OpenSFXButton" type="Button" parent="Transitions/SfxPath"]
-margin_left = -128.0
-margin_right = -8.0
-margin_bottom = 24.0
-text = "Load SFX"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SfxFileDialog" type="FileDialog" parent="Transitions/SfxPath"]
-margin_left = -48.0
-margin_top = -24.0
-margin_right = 267.0
-margin_bottom = 280.0
-window_title = "Open a File"
-resizable = true
-mode = 0
-access = 2
-filters = PoolStringArray( "*ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonSfxClear" type="Button" parent="Transitions/SfxPath"]
-margin_left = 184.0
-margin_right = 208.0
-margin_bottom = 24.0
-custom_styles/normal = SubResource( 6 )
-text = "Ø"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FxImgPath" type="LineEdit" parent="Transitions"]
-margin_left = 152.0
-margin_top = 136.0
-margin_right = 328.0
-margin_bottom = 160.0
-custom_styles/read_only = ExtResource( 6 )
-custom_styles/normal = SubResource( 2 )
-align = 1
-editable = false
-placeholder_text = "Null"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="OpenFxImgButton" type="Button" parent="Transitions/FxImgPath"]
 margin_left = -128.0
 margin_right = -8.0
 margin_bottom = 24.0
-text = "Load FX sheet"
+text = "FX Sheet"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -503,54 +505,115 @@ __meta__ = {
 margin_left = 184.0
 margin_right = 208.0
 margin_bottom = 24.0
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
 text = "Ø"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bg" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 208 )
-texture = ExtResource( 4 )
-centered = false
-
-[node name="Preview" type="Sprite" parent="Transitions"]
-position = Vector2( 24, 208 )
-centered = false
-hframes = 3
-vframes = 2
-
-[node name="Anim" type="AnimationPlayer" parent="Transitions/Preview"]
-anims/Loop = SubResource( 7 )
-
-[node name="PreviewSFX" type="AudioStreamPlayer" parent="Transitions/Preview"]
-bus = "SFX"
-
-[node name="PlayPause" type="Button" parent="Transitions"]
-margin_left = 408.0
-margin_top = 424.0
-margin_right = 568.0
-margin_bottom = 456.0
-text = "Play / Pause"
+[node name="SfxPath" type="LineEdit" parent="Transitions"]
+margin_left = 152.0
+margin_top = 136.0
+margin_right = 328.0
+margin_bottom = 160.0
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/normal = SubResource( 2 )
+align = 1
+editable = false
+placeholder_text = "Null"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stop" type="Button" parent="Transitions"]
-margin_left = 584.0
-margin_top = 424.0
-margin_right = 744.0
-margin_bottom = 456.0
-text = "Stop / Reset"
+[node name="OpenSFXButton" type="Button" parent="Transitions/SfxPath"]
+margin_left = -128.0
+margin_right = -8.0
+margin_bottom = 24.0
+text = "Hit Sound"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SfxFileDialog" type="FileDialog" parent="Transitions/SfxPath"]
+margin_left = -48.0
+margin_top = -24.0
+margin_right = 267.0
+margin_bottom = 280.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*ogg ; OGG" )
+current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
+current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSfxClear" type="Button" parent="Transitions/SfxPath"]
+margin_left = 184.0
+margin_right = 208.0
+margin_bottom = 24.0
+custom_styles/normal = SubResource( 5 )
+text = "Ø"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransitionSfxPath" type="LineEdit" parent="Transitions"]
+margin_left = 152.0
+margin_top = 168.0
+margin_right = 328.0
+margin_bottom = 192.0
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/normal = SubResource( 2 )
+align = 1
+editable = false
+placeholder_text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenTransitionSfxButton" type="Button" parent="Transitions/TransitionSfxPath"]
+margin_left = -128.0
+margin_right = -8.0
+margin_bottom = 24.0
+text = "Transition Sound"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransitionSfxFileDialog" type="FileDialog" parent="Transitions/TransitionSfxPath"]
+margin_left = -48.0
+margin_top = -24.0
+margin_right = 267.0
+margin_bottom = 280.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.ogg ; OGG" )
+current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
+current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTransitionSfxClear" type="Button" parent="Transitions/TransitionSfxPath"]
+margin_left = 184.0
+margin_right = 208.0
+margin_bottom = 24.0
+custom_styles/normal = SubResource( 5 )
+text = "Ø"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LoopOption" type="OptionButton" parent="Transitions"]
 margin_left = 24.0
-margin_top = 168.0
+margin_top = 200.0
 margin_right = 360.0
-margin_bottom = 192.0
+margin_bottom = 224.0
 text = "Looping Option"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -558,7 +621,7 @@ __meta__ = {
 
 [node name="AddTransition" type="Button" parent="Transitions"]
 margin_left = 24.0
-margin_top = 424.0
+margin_top = 400.0
 margin_right = 368.0
 margin_bottom = 496.0
 disabled = true
@@ -570,35 +633,133 @@ __meta__ = {
 
 [node name="TransitionList" type="ItemList" parent="Transitions"]
 margin_left = 408.0
-margin_top = 256.0
+margin_top = 288.0
 margin_right = 744.0
-margin_bottom = 416.0
-custom_styles/bg = SubResource( 8 )
+margin_bottom = 456.0
+custom_styles/bg = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CheckBox" type="CheckBox" parent="Transitions"]
+margin_left = 104.0
+margin_top = 368.0
+margin_right = 128.0
+margin_bottom = 392.0
+pressed = true
+
+[node name="Label" type="Label" parent="Transitions/CheckBox"]
+margin_left = -80.0
+margin_top = 6.0
+margin_bottom = 21.0
+text = "Flash Screen"
+valign = 1
+
+[node name="Preview" type="Panel" parent="."]
+margin_right = 256.0
+margin_bottom = 512.0
+custom_styles/panel = SubResource( 7 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Preview"]
+margin_left = 64.0
+margin_top = 24.0
+margin_right = 195.0
+margin_bottom = 38.0
+rect_pivot_offset = Vector2( -296, -16 )
+text = "Preview"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="Sprite" parent="Preview"]
+position = Vector2( 16, 136 )
+scale = Vector2( 1.49333, 1.48 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Preview" type="Sprite" parent="Preview"]
+position = Vector2( 16, 136 )
+scale = Vector2( 0.373333, 0.37 )
+centered = false
+hframes = 3
+vframes = 2
+
+[node name="Anim" type="AnimationPlayer" parent="Preview/Preview"]
+anims/Loop = SubResource( 8 )
+
+[node name="PreviewSFX" type="AudioStreamPlayer" parent="Preview/Preview"]
+bus = "SFX"
+
+[node name="PlayPause" type="Button" parent="Preview"]
+margin_left = 16.0
+margin_top = 72.0
+margin_right = 240.0
+margin_bottom = 96.0
+text = "Play / Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stop" type="Button" parent="Preview"]
+margin_left = 16.0
+margin_top = 104.0
+margin_right = 240.0
+margin_bottom = 128.0
+text = "Stop / Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoToBeat" type="Button" parent="Preview"]
+margin_left = 16.0
+margin_top = 440.0
+margin_right = 108.0
+margin_bottom = 464.0
+text = "Go To Beat"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BeatNum" type="SpinBox" parent="Preview/GoToBeat"]
+margin_left = 96.0
+margin_right = 224.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Conductor" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+script = ExtResource( 10 )
 
 [node name="Splash" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 8.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SplashBG" type="ColorRect" parent="Splash"]
-margin_right = 768.0
-margin_bottom = 512.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.701961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="Splash"]
-margin_left = 184.0
-margin_top = 144.0
-margin_right = 584.0
+margin_left = 312.0
+margin_top = 152.0
+margin_right = 712.0
 margin_bottom = 360.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -634,9 +795,17 @@ margin_right = 320.0
 margin_bottom = 156.0
 text = "Create"
 
-[node name="Conductor" type="AudioStreamPlayer" parent="."]
-bus = "Music"
-script = ExtResource( 10 )
+[node name="Dir" type="Label" parent="Splash/Panel"]
+margin_left = 160.0
+margin_top = 184.0
+margin_right = 240.0
+margin_bottom = 198.0
+custom_colors/font_color = Color( 1, 1, 1, 0.447059 )
+text = "_ Directory"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="button_up" from="Charter/SongPathField/OpenSongButton" to="." method="song_popup"]
 [connection signal="file_selected" from="Charter/SongPathField/SongFileDialog" to="." method="on_song_selected"]
@@ -644,25 +813,33 @@ script = ExtResource( 10 )
 [connection signal="file_selected" from="Charter/JsonPath/JsonFileDialog" to="." method="on_json_selected"]
 [connection signal="button_up" from="Charter/PatternPath/OpenPatternButton" to="." method="pattern_popup"]
 [connection signal="file_selected" from="Charter/PatternPath/PatternFileDialog" to="." method="on_pattern_selected"]
+[connection signal="button_up" from="Charter/GameOverSfxPath/OpenGameOverSfxButton" to="." method="game_over_sfx_popup"]
+[connection signal="file_selected" from="Charter/GameOverSfxPath/GameOverSfxFileDialog" to="." method="on_game_over_path_selected"]
 [connection signal="button_up" from="Charter/GenerateChart" to="Charter" method="on_generate"]
-[connection signal="preview" from="Transitions" to="Conductor" method="_on_preview"]
 [connection signal="value_changed" from="Transitions/MusicVolume" to="Transitions/MusicVolume" method="_on_MusicVolume_changed"]
 [connection signal="value_changed" from="Transitions/SfxVolume" to="Transitions/SfxVolume" method="_on_SfxVolume_changed"]
-[connection signal="value_changed" from="Transitions/SpinBox" to="Transitions" method="_on_LoopSpeed_changed"]
+[connection signal="value_changed" from="Transitions/SpinBox" to="Preview" method="_on_LoopSpeed_changed"]
 [connection signal="button_up" from="Transitions/ImgPath/OpenImageButton" to="." method="sprite_sheet_popup"]
 [connection signal="file_selected" from="Transitions/ImgPath/ImgFileDialog" to="." method="on_img_file_selected"]
 [connection signal="button_up" from="Transitions/ImgPath/ButtonImageClear" to="." method="_on_ButtonImageClear"]
-[connection signal="button_up" from="Transitions/SfxPath/OpenSFXButton" to="." method="sfx_popup"]
-[connection signal="file_selected" from="Transitions/SfxPath/SfxFileDialog" to="." method="on_sfx_file_path_selected"]
-[connection signal="button_up" from="Transitions/SfxPath/ButtonSfxClear" to="." method="_on_ButtonSfxClear"]
 [connection signal="button_up" from="Transitions/FxImgPath/OpenFxImgButton" to="." method="fx_img_popup"]
 [connection signal="file_selected" from="Transitions/FxImgPath/FxImgFileDialog" to="." method="on_fx_img_path_selected"]
 [connection signal="button_up" from="Transitions/FxImgPath/ButtonFxImgClear" to="." method="_on_ButtonFxImgClear"]
-[connection signal="button_up" from="Transitions/PlayPause" to="Transitions" method="_on_PlayStop_button_up"]
-[connection signal="button_up" from="Transitions/Stop" to="Conductor" method="_on_Stop_button_up"]
-[connection signal="button_up" from="Transitions/Stop" to="Transitions" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Transitions/SfxPath/OpenSFXButton" to="." method="sfx_popup"]
+[connection signal="file_selected" from="Transitions/SfxPath/SfxFileDialog" to="." method="on_sfx_file_path_selected"]
+[connection signal="button_up" from="Transitions/SfxPath/ButtonSfxClear" to="." method="_on_ButtonSfxClear"]
+[connection signal="button_up" from="Transitions/TransitionSfxPath/OpenTransitionSfxButton" to="." method="transition_sfx_popup"]
+[connection signal="file_selected" from="Transitions/TransitionSfxPath/TransitionSfxFileDialog" to="." method="on_transition_sfx_path_selected"]
+[connection signal="button_up" from="Transitions/TransitionSfxPath/ButtonTransitionSfxClear" to="." method="_on_transition_sfx_clear"]
 [connection signal="item_selected" from="Transitions/LoopOption" to="Transitions" method="on_LoopOption_selected"]
 [connection signal="button_up" from="Transitions/AddTransition" to="Transitions" method="_on_AddTransition"]
-[connection signal="button_up" from="Splash/Panel/Button" to="Splash" method="_on_splash_button_up"]
+[connection signal="toggled" from="Transitions/CheckBox" to="Transitions" method="_on_screen_flash_toggled"]
+[connection signal="preview" from="Preview" to="Conductor" method="_on_preview"]
+[connection signal="button_up" from="Preview/PlayPause" to="Preview" method="_on_PlayStop_button_up"]
+[connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Preview/GoToBeat" to="Conductor" method="_on_GoToBeat"]
+[connection signal="value_changed" from="Preview/GoToBeat/BeatNum" to="Conductor" method="_on_BeatNum_value_changed"]
+[connection signal="beat" from="Conductor" to="Preview" method="_on_Conductor_beat"]
 [connection signal="beat" from="Conductor" to="Charter/CurrentBeat" method="_on_Conductor_beat"]
-[connection signal="beat" from="Conductor" to="Transitions" method="_on_Conductor_beat"]
+[connection signal="button_up" from="Splash/Panel/Button" to="Splash" method="_on_splash_button_up"]

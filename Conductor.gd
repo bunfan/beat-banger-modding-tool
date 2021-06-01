@@ -25,9 +25,20 @@ func _on_preview(value):
 func _on_Stop_button_up():
 	set_stream_paused(false)
 	print("Stopping Preview")
-	emit_signal("beat", 0)
 	Global.previewing = false
+	emit_signal("beat", 0)
 	stop()
+
+var goto_beat: float = 0
+
+func _on_BeatNum_value_changed(value):
+	goto_beat = value
+func _on_GoToBeat():
+	last_half_beat = 0
+	var time = (Global.bps * 0.5) * goto_beat
+	seek(time)
+	print("GOTO")
+
 
 func _process(_delta):
 	if playing: 
@@ -37,6 +48,9 @@ func _process(_delta):
 			+ AudioServer.get_time_since_last_mix()
 			- AudioServer.get_output_latency()
 		)
+
+		#  x = y / ( 60 / BPM )
+		#  60 / BPM * x = y
 
 		var half_beat = int(song_position / (Global.bps * 0.5))
 		

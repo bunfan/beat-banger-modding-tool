@@ -193,8 +193,8 @@ func export_chart():
 	config.set_value(section, "z_spawn", z_spawn)
 	config.set_value(section, "x_spawn", x_spawn)
 	config.set_value(section, "c_spawn", c_spawn)
-	config.set_value(section, "initial_data", {"animation": null,"sound": null,"effects": null})
-	config.set_value(section, "transitions", {0:{"animation": null,"sound": null,"effects": null}})
+	config.set_value(section, "initial_data", {"animation": null,"sound_fx": null,"effects": null})
+	config.set_value(section, "transitions", {0:{"animation": null,"sound_fx": null,"effects": null}})
 	config.set_value(section, "lastBeat", [0])
 
 

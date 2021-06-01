@@ -17,11 +17,10 @@ var d_octave = [38,50,62,74]
 
 func _ready():
 	print("Program Started")
-	$OptionButton.add_item("EASY")
-	$OptionButton.add_item("HARD")	
 
 func on_generate():
 	load_json()
+	export_chart()
 
 
 	
@@ -51,25 +50,18 @@ func create_chart(midi):
 		var beat = int(floor(float(note["time"]*2) / (60/Global.bpm)))
 		if c_octave.has(midi_num):
 			half_spawn.append(beat)
-			print("appended %s to Half" % beat)
 		elif cs_octave.has(midi_num):
 			quarter_spawn.append(beat)
-			print("appended %s to Qaurter" % beat)
 		elif d_octave.has(midi_num):
 			eighth_spawn.append(beat)
-			print("appended %s to Eighth" % beat)
 		elif b_octave.has(midi_num):
 			no_spawn.append(beat)
-			print("appended %s to No Spawn" % beat)
-
-	export_chart()
 	
 
 func export_chart():
 
 	var dir = Directory.new()
 	if dir.open(Global.save_dir) == OK:
-		if !Global.chart_name: return OS.alert("Enter a name for the mod")
 
 		# Chart Dir
 		var chart_dir = Global.save_dir + Global.chart_name
@@ -77,8 +69,9 @@ func export_chart():
 		# Copy song
 		Func.copy_to_files(Global.song_file_path, Global.song_file_name, "/songs/")
 		Func.copy_to_files(Global.pattern_file_path, Global.pattern_file_name, "/textures/")
+		Func.copy_to_files(Global.games_over_sfx_path, Global.game_over_sfx_name, "/sfx/")
 					
-		section = $OptionButton.get_item_text($OptionButton.selected)
+		section = "EASY"
 
 		config.set_value(section, "name", Global.chart_name)
 		config.set_value(section, "song_path", Global.song_file_name)
@@ -86,13 +79,18 @@ func export_chart():
 		config.set_value(section, "music_volume", Global.music_volume)
 		config.set_value(section, "sfx_volume", Global.sfx_volume)
 		config.set_value(section, "bpm", Global.bpm)
+		config.set_value(section, "note_offset", 0.0)
+		config.set_value(section, "screen_flash", Global.screen_flash)
+		config.set_value(section, "game_over_sound", Global.game_over_sfx_name)
+		config.set_value(section, "post_song_delay", $PostSongDelay.value)
 		config.set_value(section, "no_spawn", no_spawn)
 		config.set_value(section, "half_spawn", half_spawn)
 		config.set_value(section, "quarter_spawn", quarter_spawn)
 		config.set_value(section, "eighth_spawn", eighth_spawn)
 		config.set_value(section, "initial_data", Global.initial_data)
 		config.set_value(section, "transitions", Global.transition_dict)
-		config.set_value(section, "lastBeat", [0])
+		config.set_value(section, "lastBeat", [Global.last_beat])
+
 		config.save(chart_dir + "/chart.cfg")
 
 		OS.alert("Generation Successful", "Notice")
