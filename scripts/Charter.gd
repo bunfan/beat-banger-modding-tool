@@ -32,12 +32,16 @@ func load_json():
 		var midi = data.result
 		create_chart(midi)
 
+func find_notes(tracks):
+	for i in range(tracks.size()):
+		if !tracks[i]["notes"].empty():
+			return tracks[i]["notes"]
 
 func create_chart(midi):
 
 	# bpm = midi["header"]["bpm"]
 	# var time_sig = midi["header"]["timeSignature"]
-	var notes = midi["tracks"][2]["notes"]
+	var notes = find_notes(midi["tracks"])
 
 	print(Global.bpm)
 

@@ -105,8 +105,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -144,8 +144,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.json ; JSON" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -183,8 +183,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png ; PNG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -222,8 +222,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -446,8 +446,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*png ; PNG", "*jpg : JPEG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -495,8 +495,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*png ; PNG", "*jpg : JPEG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -544,8 +544,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -593,8 +593,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool"
-current_path = "/Mega/Projects/BunFan/01_Development/Beat Banger Charting Tool/"
+current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
+current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -16,7 +16,7 @@ var music_volume := 0
 var sfx_volume := 0
 var current_beat = 0
 
-var popup_file_path: String = "/Mega/"
+var popup_file_path: String
 
 # File Data
 
