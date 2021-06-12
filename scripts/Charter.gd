@@ -9,10 +9,13 @@ var section
 
 var config = ConfigFile.new()
 
-var b_octave = [35,47,59,71]
-var c_octave = [36,48,60,72]
-var cs_octave = [37,49,61,73]
-var d_octave = [38,50,62,74]
+var bad_notes: int = 0
+
+
+# var c_octave = [36,48,60,72]
+# var cs_octave = [37,49,61,73]
+# var d_octave = [38,50,62,74]
+# var f_octave = [35,47,59,71]
 
 
 func _ready():
@@ -45,21 +48,39 @@ func create_chart(midi):
 
 	print(Global.bpm)
 
+	no_spawn = []
 	half_spawn = []
 	quarter_spawn = []
 	eighth_spawn = []
 
+	
+
 	for note in notes:
-		var midi_num = int(note["midi"])
+		var note_name = note["name"]
 		var beat = int(floor(float(note["time"]*2) / (60/Global.bpm)))
-		if c_octave.has(midi_num):
+
+		if note_name.findn("#") != -1:
+			bad_note(note_name)
+			continue
+		elif note_name.findn("C") != -1:
 			half_spawn.append(beat)
-		elif cs_octave.has(midi_num):
+			continue
+		elif note_name.findn("D") != -1:
 			quarter_spawn.append(beat)
-		elif d_octave.has(midi_num):
+			continue
+		elif note_name.findn("E") != -1:
 			eighth_spawn.append(beat)
-		elif b_octave.has(midi_num):
+			continue
+		elif note_name.findn("F") != -1:
 			no_spawn.append(beat)
+			continue
+		else:
+			bad_note(note_name)
+			continue
+
+func bad_note(note_name):
+	bad_notes += 1
+	print("%s Bad notes found (%s)" % [bad_notes, note_name])
 	
 
 func export_chart():
