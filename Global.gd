@@ -84,11 +84,11 @@ var screen_flash : bool = true
 
 # Transitions
 
+var transition_array = []
 var transition_dict : Dictionary
 var initial_data : Dictionary
 
 # Function to Load Midi / Chart data
-
 func load_chart(midi):
     print("Loading chart data...")
     create_chart(midi)

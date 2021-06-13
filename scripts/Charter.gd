@@ -3,8 +3,13 @@ extends Control
 var section
 
 var config = ConfigFile.new()
+var user_data = ConfigFile.new()
 
 func _ready():
+
+	if user_data.load("user://tool_data.cfg") == OK:
+		Global.popup_file_path = user_data.get_value("data", "saved_dir", "/")
+
 	print("Program Started")
 
 func on_generate():
@@ -23,6 +28,12 @@ func export_chart():
 		Func.copy_to_files(Global.song_file_path, Global.song_file_name, "/songs/")
 		Func.copy_to_files(Global.pattern_file_path, Global.pattern_file_name, "/textures/")
 		Func.copy_to_files(Global.games_over_sfx_path, Global.game_over_sfx_name, "/sfx/")
+
+		# Write Transitions to main object
+		for transition in Global.transition_array:
+			Global.transition_dict[transition[0]] = transition[1]
+
+		Global.last_beat = Global.transition_dict.keys().back()
 					
 		section = "EASY"
 
@@ -50,5 +61,10 @@ func export_chart():
 		if OS.shell_open(ProjectSettings.globalize_path(chart_dir)) == OK:
 			pass
 
+
+func _on_Charter_tree_exiting():
+	if Global.popup_file_path == "": return
+	user_data.set_value("data", "saved_dir", Global.popup_file_path)
+	user_data.save("user://tool_data.cfg")
 
 

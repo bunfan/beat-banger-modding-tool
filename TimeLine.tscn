@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Charter.gd" type="Script" id=2]
@@ -32,6 +32,9 @@ bg_color = Color( 0.815686, 0.223529, 0.223529, 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.145098, 0.12549, 0.156863, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.0313726, 0.027451, 0.0313726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
@@ -259,7 +262,7 @@ __meta__ = {
 
 [node name="GenerateChart" type="Button" parent="Charter"]
 margin_left = 24.0
-margin_top = 464.0
+margin_top = 448.0
 margin_right = 360.0
 margin_bottom = 496.0
 disabled = true
@@ -331,9 +334,9 @@ __meta__ = {
 
 [node name="OptionButton" type="OptionButton" parent="Charter"]
 margin_left = 160.0
-margin_top = 258.0
+margin_top = 256.0
 margin_right = 360.0
-margin_bottom = 278.0
+margin_bottom = 276.0
 text = "Half Note"
 items = [ "No Note", null, false, 0, null, "Half Note", null, false, 1, null, "Quarter Note", null, false, 2, null, "Eighth Note", null, false, 3, null ]
 selected = 1
@@ -349,36 +352,11 @@ margin_bottom = 20.0
 text = "Starting Note Type"
 valign = 1
 
-[node name="Transitions" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.016
-margin_left = 256.0
-margin_right = -384.0
-margin_bottom = -0.0640259
-custom_styles/panel = SubResource( 4 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Transitions"]
-margin_left = 120.0
-margin_top = 24.0
-margin_right = 251.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( -296, -16 )
-text = "Transition Generator"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicVolume" type="HSlider" parent="Transitions"]
-margin_left = 200.0
-margin_top = 288.0
-margin_right = 360.0
-margin_bottom = 312.0
+[node name="MusicVolume" type="HSlider" parent="Charter"]
+margin_left = 24.0
+margin_top = 296.0
+margin_right = 184.0
+margin_bottom = 320.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 11 )
@@ -386,7 +364,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Transitions/MusicVolume"]
+[node name="Label" type="Label" parent="Charter/MusicVolume"]
 margin_top = -8.0
 margin_right = 122.0
 margin_bottom = 6.0
@@ -395,11 +373,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SfxVolume" type="HSlider" parent="Transitions"]
+[node name="SfxVolume" type="HSlider" parent="Charter"]
 margin_left = 24.0
-margin_top = 288.0
+margin_top = 336.0
 margin_right = 184.0
-margin_bottom = 312.0
+margin_bottom = 360.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 12 )
@@ -407,17 +385,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Transitions/SfxVolume"]
+[node name="Label" type="Label" parent="Charter/SfxVolume"]
 margin_top = -8.0
 margin_right = 122.0
 margin_bottom = 6.0
 text = "SFX Volume : 0db"
 
-[node name="SpinBox" type="SpinBox" parent="Transitions"]
+[node name="SpinBox" type="SpinBox" parent="Charter"]
 margin_left = 24.0
-margin_top = 336.0
+margin_top = 384.0
 margin_right = 192.0
-margin_bottom = 360.0
+margin_bottom = 408.0
 step = 0.1
 value = 1.0
 align = 1
@@ -425,11 +403,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Transitions/SpinBox"]
+[node name="Label" type="Label" parent="Charter/SpinBox"]
 margin_top = -16.0
 margin_right = 122.0
 margin_bottom = -2.0
 text = "Animation Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="Charter"]
+margin_left = 104.0
+margin_top = 416.0
+margin_right = 128.0
+margin_bottom = 440.0
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Charter/CheckBox"]
+margin_left = -80.0
+margin_top = 6.0
+margin_bottom = 21.0
+text = "Flash Screen"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Transitions" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.016
+margin_right = -640.0
+margin_bottom = -0.0640259
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Transitions"]
+margin_left = 120.0
+margin_top = 24.0
+margin_right = 251.0
+margin_bottom = 38.0
+rect_pivot_offset = Vector2( -296, -16 )
+text = "Transition Generator"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -632,9 +654,9 @@ __meta__ = {
 
 [node name="LoopOption" type="OptionButton" parent="Transitions"]
 margin_left = 24.0
-margin_top = 198.0
+margin_top = 200.0
 margin_right = 360.0
-margin_bottom = 222.0
+margin_bottom = 224.0
 text = "Looping Option"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -642,8 +664,8 @@ __meta__ = {
 
 [node name="AddTransition" type="Button" parent="Transitions"]
 margin_left = 24.0
-margin_top = 400.0
-margin_right = 368.0
+margin_top = 448.0
+margin_right = 360.0
 margin_bottom = 496.0
 disabled = true
 text = "Add Transition"
@@ -653,31 +675,33 @@ __meta__ = {
 }
 
 [node name="TransitionList" type="ItemList" parent="Transitions"]
-margin_left = 408.0
-margin_top = 288.0
-margin_right = 744.0
-margin_bottom = 456.0
+margin_left = 24.0
+margin_top = 264.0
+margin_right = 360.0
+margin_bottom = 440.0
 custom_styles/bg = SubResource( 6 )
+allow_rmb_select = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CheckBox" type="CheckBox" parent="Transitions"]
-margin_left = 104.0
-margin_top = 368.0
-margin_right = 128.0
-margin_bottom = 392.0
-pressed = true
-
-[node name="Label" type="Label" parent="Transitions/CheckBox"]
-margin_left = -80.0
-margin_top = 6.0
-margin_bottom = 21.0
-text = "Flash Screen"
-valign = 1
+[node name="StartingData" type="LineEdit" parent="Transitions"]
+margin_left = 24.0
+margin_top = 232.0
+margin_right = 360.0
+margin_bottom = 256.0
+custom_styles/read_only = SubResource( 14 )
+custom_styles/normal = SubResource( 14 )
+align = 1
+editable = false
+placeholder_text = "No starting transition"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Preview" type="Panel" parent="."]
-margin_right = 256.0
+margin_left = 384.0
+margin_right = 640.0
 margin_bottom = 512.0
 custom_styles/panel = SubResource( 7 )
 script = ExtResource( 13 )
@@ -906,6 +930,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="tree_exiting" from="Charter" to="Charter" method="_on_Charter_tree_exiting"]
 [connection signal="button_up" from="Charter/SongPathField/OpenSongButton" to="." method="song_popup"]
 [connection signal="file_selected" from="Charter/SongPathField/SongFileDialog" to="." method="on_song_selected"]
 [connection signal="button_up" from="Charter/JsonPath/OpenJsonButton" to="." method="json_popup"]
@@ -916,9 +941,10 @@ __meta__ = {
 [connection signal="file_selected" from="Charter/GameOverSfxPath/GameOverSfxFileDialog" to="." method="on_game_over_path_selected"]
 [connection signal="button_up" from="Charter/GenerateChart" to="Charter" method="on_generate"]
 [connection signal="item_selected" from="Charter/OptionButton" to="Charter/OptionButton" method="_on_OptionButton_item_selected"]
-[connection signal="value_changed" from="Transitions/MusicVolume" to="Transitions/MusicVolume" method="_on_MusicVolume_changed"]
-[connection signal="value_changed" from="Transitions/SfxVolume" to="Transitions/SfxVolume" method="_on_SfxVolume_changed"]
-[connection signal="value_changed" from="Transitions/SpinBox" to="Preview" method="_on_LoopSpeed_changed"]
+[connection signal="value_changed" from="Charter/MusicVolume" to="Charter/MusicVolume" method="_on_MusicVolume_changed"]
+[connection signal="value_changed" from="Charter/SfxVolume" to="Charter/SfxVolume" method="_on_SfxVolume_changed"]
+[connection signal="value_changed" from="Charter/SpinBox" to="Preview" method="_on_LoopSpeed_changed"]
+[connection signal="toggled" from="Charter/CheckBox" to="Transitions" method="_on_screen_flash_toggled"]
 [connection signal="button_up" from="Transitions/ImgPath/OpenImageButton" to="." method="sprite_sheet_popup"]
 [connection signal="file_selected" from="Transitions/ImgPath/ImgFileDialog" to="." method="on_img_file_selected"]
 [connection signal="button_up" from="Transitions/ImgPath/ButtonImageClear" to="." method="_on_ButtonImageClear"]
@@ -933,7 +959,7 @@ __meta__ = {
 [connection signal="button_up" from="Transitions/TransitionSfxPath/ButtonTransitionSfxClear" to="." method="_on_transition_sfx_clear"]
 [connection signal="item_selected" from="Transitions/LoopOption" to="Transitions" method="on_LoopOption_selected"]
 [connection signal="button_up" from="Transitions/AddTransition" to="Transitions" method="_on_AddTransition"]
-[connection signal="toggled" from="Transitions/CheckBox" to="Transitions" method="_on_screen_flash_toggled"]
+[connection signal="item_rmb_selected" from="Transitions/TransitionList" to="Transitions" method="_on_TransitionList_item_rmb_selected"]
 [connection signal="preview" from="Preview" to="Conductor" method="_on_preview"]
 [connection signal="button_up" from="Preview/PlayPause" to="Preview" method="_on_PlayStop_button_up"]
 [connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
