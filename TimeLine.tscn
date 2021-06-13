@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Charter.gd" type="Script" id=2]
@@ -25,7 +25,7 @@ bg_color = Color( 0, 0, 0, 1 )
 bg_color = Color( 0.0392157, 0.0352941, 0.0431373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.054902, 0.0509804, 0.0627451, 1 )
+bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.815686, 0.223529, 0.223529, 1 )
@@ -37,7 +37,7 @@ bg_color = Color( 0.145098, 0.12549, 0.156863, 1 )
 bg_color = Color( 0.0313726, 0.027451, 0.0313726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
+bg_color = Color( 0.027451, 0.027451, 0.0313726, 1 )
 
 [sub_resource type="Animation" id=8]
 step = 0.166667
@@ -52,6 +52,49 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=15]
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Loop_fx"
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="StyleBoxFlat" id=12]
@@ -723,15 +766,13 @@ __meta__ = {
 }
 
 [node name="Bg" type="Sprite" parent="Preview"]
-position = Vector2( 16, 136 )
+position = Vector2( 128, 284 )
 scale = Vector2( 1.49333, 1.48 )
 texture = ExtResource( 4 )
-centered = false
 
 [node name="Preview" type="Sprite" parent="Preview"]
-position = Vector2( 16, 136 )
+position = Vector2( 128, 284 )
 scale = Vector2( 0.373333, 0.37 )
-centered = false
 hframes = 3
 vframes = 2
 
@@ -740,6 +781,34 @@ anims/Loop = SubResource( 8 )
 
 [node name="PreviewSFX" type="AudioStreamPlayer" parent="Preview/Preview"]
 bus = "SFX"
+
+[node name="Tween" type="Tween" parent="Preview/Preview"]
+
+[node name="Fx" type="Sprite" parent="Preview"]
+position = Vector2( 128, 284 )
+scale = Vector2( 0.373333, 0.37 )
+hframes = 3
+vframes = 2
+
+[node name="Anim" type="AnimationPlayer" parent="Preview/Fx"]
+anims/Loop = SubResource( 15 )
+anims/Loop_fx = SubResource( 16 )
+
+[node name="Tween" type="Tween" parent="Preview/Fx"]
+
+[node name="Flash" type="ColorRect" parent="Preview"]
+margin_left = 16.0
+margin_top = 136.0
+margin_right = 240.0
+margin_bottom = 432.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Preview/Flash"]
+
+[node name="TransitionSound" type="AudioStreamPlayer" parent="Preview"]
 
 [node name="PlayPause" type="Button" parent="Preview"]
 margin_left = 16.0

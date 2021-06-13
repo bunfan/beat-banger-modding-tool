@@ -43,7 +43,7 @@ func export_chart():
 		config.set_value(section, "music_volume", Global.music_volume)
 		config.set_value(section, "sfx_volume", Global.sfx_volume)
 		config.set_value(section, "bpm", Global.bpm)
-		config.set_value(section, "note_offset", Global.starting_note_type)
+		config.set_value(section, "note_offset", 0.0)
 		config.set_value(section, "screen_flash", Global.screen_flash)
 		config.set_value(section, "game_over_sound", Global.game_over_sfx_name)
 		config.set_value(section, "post_song_delay", $PostSongDelay.value)

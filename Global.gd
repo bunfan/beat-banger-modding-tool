@@ -16,7 +16,7 @@ var bpm : float
 var bps : float 
 var previewing: bool
 var loop_speed := 1.0
-var last_beat: int
+var last_beat: int = 0
 
 var music_volume := 0
 var sfx_volume := 0

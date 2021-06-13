@@ -26,7 +26,7 @@ func _on_AddTransition():
 			"animation": Global.sprite_sheet_name,
 			"looping": Global.no_input_looping,
 			"sound_fx": Global.sfx_file_name,
-			"note_type": 1
+			"note_type": Global.starting_note_type
 		}
 
 		$StartingData.placeholder_text = "Starting Animation : %s" % Global.initial_data["animation"]

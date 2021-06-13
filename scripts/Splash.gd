@@ -1,5 +1,9 @@
 extends Control
 
+func _ready():
+	$Panel/ModName.grab_focus()
+
+
 func _on_splash_button_up():
 	if !$Panel/ModName.text.is_valid_filename(): return OS.alert("Invalid Name")
 	print("Generating Template for %s" % $Panel/ModName.text)

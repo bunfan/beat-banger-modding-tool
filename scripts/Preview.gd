@@ -43,6 +43,17 @@ func _on_Stop_button_up():
 func _on_Conductor_beat(half_beat):
 	if Global.previewing == false: return
 
+	# Transitions
+	if !Global.transition_array.empty():
+		for transition in Global.transition_array:
+			if transition[0] == half_beat:
+				flash()
+				load_image(transition)
+				load_fx(transition)
+				load_ogg_and_play(transition)
+				
+				
+
 	# Get Note type
 	if Global.half_spawn.has(half_beat):
 		print("Half Beat")
@@ -74,8 +85,45 @@ func run_loop():
 	$Preview/Anim.stop()
 	$Preview/Anim.play("Loop")
 	$Preview/PreviewSFX.play()
-
+	$Preview/Tween.interpolate_property($Preview,"modulate", Color(1,1,1,1), Color(0.6,0.6,0.6,1), 1/$Preview/Anim.playback_speed)
+	$Preview/Tween.start()
 
 func _on_LoopSpeed_changed(value):
 	Global.loop_speed = value
 	
+func load_image(transition):
+	var img = Image.new()
+	img.load(Global.save_dir + Global.chart_name + "/anims/" + transition[1]["animation"])
+	var tex = ImageTexture.new()
+	tex.create_from_image(img)
+	$Preview.texture = tex
+
+func load_fx(transition):
+	var img = Image.new()
+	img.load(Global.save_dir + Global.chart_name + "/anims/fx/" + transition[1]["effects"])
+	var tex = ImageTexture.new()
+	tex.create_from_image(img)
+	$Fx.texture = tex
+	$Fx/Anim.play("Loop_fx")
+
+func load_ogg_and_play(transition):
+	var ogg_file = File.new()
+	if ogg_file.open(Global.save_dir + Global.chart_name + "/sfx/" + transition[1]["transition_sound"], File.READ) == OK:
+		var bytes = ogg_file.get_buffer(ogg_file.get_len())
+		var stream_data = AudioStreamOGGVorbis.new()
+		stream_data.data = bytes
+		ogg_file.close()
+		$TransitionSound.stream = stream_data
+		$TransitionSound.play()
+
+
+func flash():
+	if Global.screen_flash == true:
+		$Flash/Tween.interpolate_property(
+			$Flash,
+			"color",
+			Color(1,1,1,1),
+			Color(1,1,1,0),
+			1.0
+		)
+		$Flash/Tween.start()
