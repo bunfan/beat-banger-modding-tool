@@ -5,5 +5,5 @@ func _ready():
 
 func _on_Conductor_beat(beat):
 	Global.current_beat = beat
-	$CenterContainer/Label.text = str(beat)
+	$CenterContainer/Label.text = "Current Beat : %s" % beat
 

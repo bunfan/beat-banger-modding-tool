@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Charter.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/Data_Gathering/MusicVolume.gd" type="Script" id=11]
 [ext_resource path="res://scripts/Data_Gathering/SfxVolume.gd" type="Script" id=12]
 [ext_resource path="res://scripts/Preview.gd" type="Script" id=13]
+[ext_resource path="res://scripts/Button_controllers/SetStartingNoteType.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0862745, 0.0784314, 0.101961, 1 )
@@ -49,6 +50,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.0980392, 0.639216, 0.858824, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.964706, 0.470588, 0.345098, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.909804, 0.160784, 0.156863, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.0823529, 0.0705882, 0.0901961, 1 )
@@ -105,8 +134,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*ogg ; OGG" )
-current_dir = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool"
-current_path = "/Mega/Projects/BunFan/Development/Beat_Banger_Charting_Tool/beat-banger-charting-tool/"
+current_dir = "/Mega/Projects/BunFan"
+current_path = "/Mega/Projects/BunFan/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -278,34 +307,6 @@ margin_right = 182.0
 margin_bottom = 19.0
 text = "BPM"
 
-[node name="CurrentBeat" type="Panel" parent="Charter"]
-margin_left = 24.0
-margin_top = 256.0
-margin_right = 360.0
-margin_bottom = 280.0
-custom_styles/panel = SubResource( 3 )
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="Charter/CurrentBeat"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -1.0
-margin_bottom = -1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Charter/CurrentBeat/CenterContainer"]
-margin_left = 128.0
-margin_top = 5.0
-margin_right = 208.0
-margin_bottom = 19.0
-text = "Current Beat"
-
 [node name="PostSongDelay" type="SpinBox" parent="Charter"]
 margin_left = 176.0
 margin_top = 192.0
@@ -327,6 +328,26 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="OptionButton" type="OptionButton" parent="Charter"]
+margin_left = 160.0
+margin_top = 258.0
+margin_right = 360.0
+margin_bottom = 278.0
+text = "Half Note"
+items = [ "No Note", null, false, 0, null, "Half Note", null, false, 1, null, "Quarter Note", null, false, 2, null, "Eighth Note", null, false, 3, null ]
+selected = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Charter/OptionButton"]
+margin_left = -136.0
+margin_right = -11.0
+margin_bottom = 20.0
+text = "Starting Note Type"
+valign = 1
 
 [node name="Transitions" type="Panel" parent="."]
 anchor_right = 1.0
@@ -354,10 +375,10 @@ __meta__ = {
 }
 
 [node name="MusicVolume" type="HSlider" parent="Transitions"]
-margin_left = 24.0
-margin_top = 248.0
-margin_right = 192.0
-margin_bottom = 272.0
+margin_left = 200.0
+margin_top = 288.0
+margin_right = 360.0
+margin_bottom = 312.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 11 )
@@ -377,7 +398,7 @@ __meta__ = {
 [node name="SfxVolume" type="HSlider" parent="Transitions"]
 margin_left = 24.0
 margin_top = 288.0
-margin_right = 192.0
+margin_right = 184.0
 margin_bottom = 312.0
 min_value = -12.0
 max_value = 12.0
@@ -611,9 +632,9 @@ __meta__ = {
 
 [node name="LoopOption" type="OptionButton" parent="Transitions"]
 margin_left = 24.0
-margin_top = 200.0
+margin_top = 198.0
 margin_right = 360.0
-margin_bottom = 224.0
+margin_bottom = 222.0
 text = "Looping Option"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -699,7 +720,7 @@ bus = "SFX"
 [node name="PlayPause" type="Button" parent="Preview"]
 margin_left = 16.0
 margin_top = 72.0
-margin_right = 240.0
+margin_right = 120.0
 margin_bottom = 96.0
 text = "Play / Pause"
 __meta__ = {
@@ -707,10 +728,10 @@ __meta__ = {
 }
 
 [node name="Stop" type="Button" parent="Preview"]
-margin_left = 16.0
-margin_top = 104.0
+margin_left = 136.0
+margin_top = 72.0
 margin_right = 240.0
-margin_bottom = 128.0
+margin_bottom = 96.0
 text = "Stop / Reset"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -718,9 +739,9 @@ __meta__ = {
 
 [node name="GoToBeat" type="Button" parent="Preview"]
 margin_left = 16.0
-margin_top = 440.0
+margin_top = 472.0
 margin_right = 108.0
-margin_bottom = 464.0
+margin_bottom = 496.0
 text = "Go To Beat"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -730,9 +751,87 @@ __meta__ = {
 margin_left = 96.0
 margin_right = 224.0
 margin_bottom = 24.0
+allow_greater = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Preview"]
+margin_left = 64.0
+margin_top = 440.0
+margin_right = 192.0
+margin_bottom = 464.0
+custom_constants/separation = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Preview/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.313726 )
+margin_right = 23.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 12 )
+disabled = true
+
+[node name="Button2" type="Button" parent="Preview/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.313726 )
+margin_left = 34.0
+margin_right = 58.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+disabled = true
+
+[node name="Button3" type="Button" parent="Preview/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.313726 )
+margin_left = 69.0
+margin_right = 93.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 10 )
+disabled = true
+
+[node name="Button4" type="Button" parent="Preview/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.313726 )
+margin_left = 104.0
+margin_right = 128.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
+disabled = true
+
+[node name="CurrentBeat" type="Panel" parent="Preview"]
+margin_left = 16.0
+margin_top = 104.0
+margin_right = 240.0
+margin_bottom = 128.0
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Preview/CurrentBeat"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Preview/CurrentBeat/CenterContainer"]
+margin_left = 72.0
+margin_top = 5.0
+margin_right = 152.0
+margin_bottom = 19.0
+text = "Current Beat"
 
 [node name="Conductor" type="AudioStreamPlayer" parent="."]
 bus = "Music"
@@ -796,13 +895,13 @@ margin_bottom = 156.0
 text = "Create"
 
 [node name="Dir" type="Label" parent="Splash/Panel"]
-margin_left = 160.0
-margin_top = 184.0
-margin_right = 240.0
-margin_bottom = 198.0
+margin_top = 170.0
+margin_right = 400.0
+margin_bottom = 208.0
 custom_colors/font_color = Color( 1, 1, 1, 0.447059 )
 text = "_ Directory"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -816,6 +915,7 @@ __meta__ = {
 [connection signal="button_up" from="Charter/GameOverSfxPath/OpenGameOverSfxButton" to="." method="game_over_sfx_popup"]
 [connection signal="file_selected" from="Charter/GameOverSfxPath/GameOverSfxFileDialog" to="." method="on_game_over_path_selected"]
 [connection signal="button_up" from="Charter/GenerateChart" to="Charter" method="on_generate"]
+[connection signal="item_selected" from="Charter/OptionButton" to="Charter/OptionButton" method="_on_OptionButton_item_selected"]
 [connection signal="value_changed" from="Transitions/MusicVolume" to="Transitions/MusicVolume" method="_on_MusicVolume_changed"]
 [connection signal="value_changed" from="Transitions/SfxVolume" to="Transitions/SfxVolume" method="_on_SfxVolume_changed"]
 [connection signal="value_changed" from="Transitions/SpinBox" to="Preview" method="_on_LoopSpeed_changed"]
@@ -836,10 +936,10 @@ __meta__ = {
 [connection signal="toggled" from="Transitions/CheckBox" to="Transitions" method="_on_screen_flash_toggled"]
 [connection signal="preview" from="Preview" to="Conductor" method="_on_preview"]
 [connection signal="button_up" from="Preview/PlayPause" to="Preview" method="_on_PlayStop_button_up"]
-[connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/GoToBeat" to="Conductor" method="_on_GoToBeat"]
 [connection signal="value_changed" from="Preview/GoToBeat/BeatNum" to="Conductor" method="_on_BeatNum_value_changed"]
 [connection signal="beat" from="Conductor" to="Preview" method="_on_Conductor_beat"]
-[connection signal="beat" from="Conductor" to="Charter/CurrentBeat" method="_on_Conductor_beat"]
+[connection signal="beat" from="Conductor" to="Preview/CurrentBeat" method="_on_Conductor_beat"]
 [connection signal="button_up" from="Splash/Panel/Button" to="Splash" method="_on_splash_button_up"]
