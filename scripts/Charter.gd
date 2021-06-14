@@ -10,6 +10,8 @@ func _ready():
 	if user_data.load("user://tool_data.cfg") == OK:
 		Global.popup_file_path = user_data.get_value("data", "saved_dir", "/")
 
+	$BpmField.value = Global.bpm
+
 	print("Program Started")
 
 func on_generate():
@@ -34,7 +36,11 @@ func export_chart():
 		for transition in Global.transition_array:
 			Global.transition_dict[transition[0]] = transition[1]
 
-		Global.last_beat = Global.transition_dict.keys().back()
+		if !Global.transition_dict.keys().empty():
+			Global.last_beat = Global.transition_dict.keys().back()
+		else:
+			Global.last_beat = 0
+
 					
 		section = "EASY"
 
@@ -62,6 +68,10 @@ func export_chart():
 		if OS.shell_open(ProjectSettings.globalize_path(chart_dir)) == OK:
 			pass
 
+func _on_BpmField_value_changed(value):
+	Global.bpm = value
+	Global.bps = (60 / Global.bpm)
+	print(Global.bps)
 
 func _on_Charter_tree_exiting():
 	if Global.popup_file_path == "": return

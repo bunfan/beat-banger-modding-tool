@@ -12,7 +12,7 @@ var quarter_spawn = []
 var eighth_spawn = []
 var bad_notes: int = 0
 
-var bpm : float
+var bpm : float = 128.0
 var bps : float 
 var previewing: bool = false
 var loop_speed := 1.0
@@ -21,6 +21,8 @@ var last_beat: int = 0
 var music_volume := 0
 var sfx_volume := 0
 var current_beat = 0
+
+var timeline_page: int = 0
 
 # Preview variables
 
@@ -88,59 +90,59 @@ var transition_dict : Dictionary
 var initial_data : Dictionary
 
 # Function to Load Midi / Chart data
-func load_chart(midi):
-    print("Loading chart data...")
-    create_chart(midi)
+# func load_chart(midi):
+#     print("Loading chart data...")
+#     create_chart(midi)
 
-func find_notes(tracks):
-    # Iterate through tracks to find notes
-	for i in range(tracks.size()):
-		if !tracks[i]["notes"].empty():
-			return tracks[i]["notes"]
+# func find_notes(tracks):
+#     # Iterate through tracks to find notes
+# 	for i in range(tracks.size()):
+# 		if !tracks[i]["notes"].empty():
+# 			return tracks[i]["notes"]
 
-func create_chart(midi):
+# func create_chart(midi):
 
-    # Grab notes data
-	var notes = find_notes(midi["tracks"])
+#     # Grab notes data
+# 	var notes = find_notes(midi["tracks"])
 
-    # Clear arrays
-	no_spawn = []
-	half_spawn = []
-	quarter_spawn = []
-	eighth_spawn = []
+#     # Clear arrays
+# 	no_spawn = []
+# 	half_spawn = []
+# 	quarter_spawn = []
+# 	eighth_spawn = []
 
-	for note in notes:
-		var note_name = note["name"]
-		var beat = int(floor(float(note["time"]*2) / (60/bpm)))
+# 	for note in notes:
+# 		var note_name = note["name"]
+# 		var beat = int(floor(float(note["time"]*2) / (60/bpm)))
 
-		if note_name.findn("#") != -1:
-			bad_note(note_name)
-			continue
-		elif note_name.findn("C") != -1:
-			half_spawn.append(beat)
-			continue
-		elif note_name.findn("D") != -1:
-			quarter_spawn.append(beat)
-			continue
-		elif note_name.findn("E") != -1:
-			eighth_spawn.append(beat)
-			continue
-		elif note_name.findn("F") != -1:
-			no_spawn.append(beat)
-			continue
-		else:
-			bad_note(note_name)
-			continue
+# 		if note_name.findn("#") != -1:
+# 			bad_note(note_name)
+# 			continue
+# 		elif note_name.findn("C") != -1:
+# 			half_spawn.append(beat)
+# 			continue
+# 		elif note_name.findn("D") != -1:
+# 			quarter_spawn.append(beat)
+# 			continue
+# 		elif note_name.findn("E") != -1:
+# 			eighth_spawn.append(beat)
+# 			continue
+# 		elif note_name.findn("F") != -1:
+# 			no_spawn.append(beat)
+# 			continue
+# 		else:
+# 			bad_note(note_name)
+# 			continue
 	
-	print(no_spawn)
-	print(half_spawn)
-	print(quarter_spawn)
-	print(eighth_spawn)
+# 	print(no_spawn)
+# 	print(half_spawn)
+# 	print(quarter_spawn)
+# 	print(eighth_spawn)
         
 
-func bad_note(note_name):
-	bad_notes += 1
-	print("%s Bad notes found (%s)" % [bad_notes, note_name])
+# func bad_note(note_name):
+# 	bad_notes += 1
+# 	print("%s Bad notes found (%s)" % [bad_notes, note_name])
 
 
 # Full Screen

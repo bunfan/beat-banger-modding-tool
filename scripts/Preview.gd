@@ -34,7 +34,7 @@ func _on_PlayStop_button_up():
 
 	if !Global.sprite_sheet_file_path: return print("No Animation Loaded")
 	if !Global.song_file_name: return print("No Song Loaded")
-	if !Global.json_file_name: return print("No Chart Loaded")
+	# if !Global.json_file_name: return print("No Chart Loaded")
 
 	if $Preview/Anim.current_animation == "Loop":
 		emit_signal("preview")

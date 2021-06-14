@@ -3,9 +3,27 @@ extends AudioStreamPlayer
 var song_position = 0
 var last_half_beat = 0
 
+onready var timeline = get_node("../Timeline")
+
 signal beat(half_beat)
 
 func _input(event):
+	if playing and Global.previewing == true:
+
+		# On input write tochart and override animation
+		if event.is_action_pressed("mark_half"):
+			Global.half_spawn.append(Global.current_beat)
+			timeline.half_keyframes.append({Global.current_beat:Global.timeline_page})
+			Global.current_note_type = 1
+		elif event.is_action_pressed("mark_quarter"):
+			Global.quarter_spawn.append(Global.current_beat)
+			timeline.quarter_keyframes.append({Global.current_beat:Global.timeline_page})
+			Global.current_note_type = 2
+		elif event.is_action_pressed("mark_eighth"):
+			Global.eighth_spawn.append(Global.current_beat)
+			timeline.eighth_keyframes.append({Global.current_beat:Global.timeline_page})
+			Global.current_note_type = 3
+
 	if event.is_action_pressed("StopReset"):
 		_on_Stop_button_up()
 
