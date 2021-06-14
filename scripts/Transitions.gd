@@ -63,7 +63,14 @@ func refresh_list():
 	Global.transition_array.sort_custom(self, "sort_transitions")
 	for transition in Global.transition_array:
 		# Add to list
-		$TransitionList.add_item("%s: %s" % [transition[0],transition[1]["animation"]])
+		var transition_string = "%s: " % transition[0]
+		if transition[1]["animation"] != "":
+			transition_string += "%s" % transition[1]["animation"]
+		if transition[1]["effects"] != "":
+			transition_string += " | %s" % transition[1]["effects"] 
+		if transition[1]["transition_sound"] != "":
+			transition_string += " | %s" % transition[1]["transition_sound"]
+		$TransitionList.add_item(transition_string)
 
 
 func sort_transitions(a,b):

@@ -30,6 +30,7 @@ func export_chart():
 		Func.copy_to_files(Global.games_over_sfx_path, Global.game_over_sfx_name, "/sfx/")
 
 		# Write Transitions to main object
+		Global.transition_dict.clear()
 		for transition in Global.transition_array:
 			Global.transition_dict[transition[0]] = transition[1]
 

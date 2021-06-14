@@ -11,9 +11,24 @@ onready var preview_buttons = [
 ]
 
 onready var starting_note_type_selector = get_node("../Charter/OptionButton")
+onready var splash_screen = get_node("../Splash")
 
 func _ready():
 	Global.preview_buttons = preview_buttons
+
+func _input(event):
+	if splash_screen.visible == true: return
+
+	if event.is_action_pressed("PlayPause"):
+		if get_focus_owner() != null:
+			get_focus_owner().release_focus()
+		_on_PlayStop_button_up()
+
+	if event.is_action_pressed("StopReset"):
+		if get_focus_owner() != null:
+			get_focus_owner().release_focus()
+		_on_Stop_button_up()
+
 
 func _on_PlayStop_button_up():
 
@@ -22,13 +37,13 @@ func _on_PlayStop_button_up():
 	if !Global.json_file_name: return print("No Chart Loaded")
 
 	if $Preview/Anim.current_animation == "Loop":
-		emit_signal("preview", false)
+		emit_signal("preview")
 		$Preview/Anim.stop()
 	else:
 		if Global.current_beat == 0: 
 			Global.current_note_type = starting_note_type_selector.selected
 			$Preview/Anim.playback_speed = Global.loop_speed * Global.notespeed_array[Global.current_note_type]
-		emit_signal("preview", true)
+		emit_signal("preview")
 		$Preview/Anim.play("Loop")
 
 func _on_Stop_button_up():
@@ -37,7 +52,6 @@ func _on_Stop_button_up():
 	Global.current_beat = 0
 
 	# Stop Aniamtion
-	emit_signal("preview", false)
 	$Preview/Anim.stop()
 
 func _on_Conductor_beat(half_beat):
@@ -64,9 +78,9 @@ func _on_Conductor_beat(half_beat):
 	elif Global.eighth_spawn.has(half_beat):
 		print("Eighth Beat")
 		Global.current_note_type = 3
-	# elif Global.no_spawn.has(half_beat):
-	# 	print("No Beat")
-	# 	Global.current_note_type
+	elif Global.no_spawn.has(half_beat):
+		print("No Beat")
+		Global.current_note_type = 0
 
 	# Change loop speed based on note type
 	if Global.current_note_type == 1:
@@ -92,21 +106,24 @@ func _on_LoopSpeed_changed(value):
 	Global.loop_speed = value
 	
 func load_image(transition):
+	if transition[1]["animation"] == "": return
 	var img = Image.new()
-	img.load(Global.save_dir + Global.chart_name + "/anims/" + transition[1]["animation"])
-	var tex = ImageTexture.new()
-	tex.create_from_image(img)
-	$Preview.texture = tex
+	if img.load(Global.save_dir + Global.chart_name + "/anims/" + transition[1]["animation"]) == OK:
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		$Preview.texture = tex
 
 func load_fx(transition):
+	if transition[1]["effects"] == "": return
 	var img = Image.new()
-	img.load(Global.save_dir + Global.chart_name + "/anims/fx/" + transition[1]["effects"])
-	var tex = ImageTexture.new()
-	tex.create_from_image(img)
-	$Fx.texture = tex
-	$Fx/Anim.play("Loop_fx")
+	if img.load(Global.save_dir + Global.chart_name + "/anims/fx/" + transition[1]["effects"]) == OK:
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		$Fx.texture = tex
+		$Fx/Anim.play("Loop_fx")
 
 func load_ogg_and_play(transition):
+	if transition[1]["transition_sound"] == "": return
 	var ogg_file = File.new()
 	if ogg_file.open(Global.save_dir + Global.chart_name + "/sfx/" + transition[1]["transition_sound"], File.READ) == OK:
 		var bytes = ogg_file.get_buffer(ogg_file.get_len())

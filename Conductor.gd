@@ -5,34 +5,44 @@ var last_half_beat = 0
 
 signal beat(half_beat)
 
-func _on_preview(value):
-	if value == true:
-		
-		if playing:
-			set_stream_paused(false)
-		else:
-			last_half_beat = 0
-			emit_signal("beat", last_half_beat)
+func _input(event):
+	if event.is_action_pressed("StopReset"):
+		_on_Stop_button_up()
+
+func _on_preview():
+	Global.previewing = !Global.previewing
+
+	print(Global.previewing)
+
+	if Global.previewing:
+
+		# Play song again if stopped
+		if !playing:
 			play()
-	
+
+		# Unpause song and play next beat
+		set_stream_paused(false)
+		last_half_beat = 0
+		emit_signal("beat", Global.current_beat)
 		print("Playing Preview")
-		Global.previewing = true
+
 	else:
+		# Pause song
 		set_stream_paused(true)
 		print("Pausing Preview")
-		Global.previewing = false
 
 func _on_Stop_button_up():
-	set_stream_paused(false)
-	print("Stopping Preview")
+	# Stop song
+	stop()
 	Global.previewing = false
 	emit_signal("beat", 0)
-	stop()
-
+	print("Stopping Preview")
+	
 var goto_beat: float = 0
 
 func _on_BeatNum_value_changed(value):
 	goto_beat = value
+	
 func _on_GoToBeat():
 	last_half_beat = 0
 	var time = (Global.bps * 0.5) * goto_beat

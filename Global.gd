@@ -14,7 +14,7 @@ var bad_notes: int = 0
 
 var bpm : float
 var bps : float 
-var previewing: bool
+var previewing: bool = false
 var loop_speed := 1.0
 var last_beat: int = 0
 
@@ -48,7 +48,6 @@ var popup_file_path: String setget set_popup_file_path
 
 func set_popup_file_path(value):
 	popup_file_path = value
-	# popup_file_path = ProjectSettings.globalize_path(value)
 	print(popup_file_path)
 
 var chart_name : String
@@ -149,3 +148,6 @@ func _input(event):
 	if !event is InputEventKey: return
 	if event.is_action_pressed("Fullscreen"):
 		OS.set_window_fullscreen(!OS.is_window_fullscreen())
+	
+
+

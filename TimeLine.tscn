@@ -33,13 +33,13 @@ bg_color = Color( 0.815686, 0.223529, 0.223529, 1 )
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.145098, 0.12549, 0.156863, 1 )
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.0313726, 0.027451, 0.0313726, 1 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.027451, 0.027451, 0.0313726, 1 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 step = 0.166667
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -54,7 +54,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 step = 0.166667
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=11]
 resource_name = "Loop_fx"
 step = 0.166667
 tracks/0/type = "value"
@@ -104,28 +104,28 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.0980392, 0.639216, 0.858824, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.964706, 0.470588, 0.345098, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.909804, 0.160784, 0.156863, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.0823529, 0.0705882, 0.0901961, 1 )
 
 [node name="Main" type="Control"]
@@ -396,10 +396,10 @@ text = "Starting Note Type"
 valign = 1
 
 [node name="MusicVolume" type="HSlider" parent="Charter"]
-margin_left = 24.0
-margin_top = 296.0
-margin_right = 184.0
-margin_bottom = 320.0
+margin_left = 176.0
+margin_top = 288.0
+margin_right = 360.0
+margin_bottom = 304.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 11 )
@@ -408,19 +408,20 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Charter/MusicVolume"]
-margin_top = -8.0
-margin_right = 122.0
-margin_bottom = 6.0
+margin_left = -152.0
+margin_right = -25.0
+margin_bottom = 16.0
 text = "Music Volume : 0db"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SfxVolume" type="HSlider" parent="Charter"]
-margin_left = 24.0
-margin_top = 336.0
-margin_right = 184.0
-margin_bottom = 360.0
+margin_left = 176.0
+margin_top = 320.0
+margin_right = 360.0
+margin_bottom = 336.0
 min_value = -12.0
 max_value = 12.0
 script = ExtResource( 12 )
@@ -429,16 +430,17 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Charter/SfxVolume"]
-margin_top = -8.0
-margin_right = 122.0
-margin_bottom = 6.0
+margin_left = -152.0
+margin_right = -30.0
+margin_bottom = 16.0
 text = "SFX Volume : 0db"
+valign = 1
 
 [node name="SpinBox" type="SpinBox" parent="Charter"]
-margin_left = 24.0
-margin_top = 384.0
-margin_right = 192.0
-margin_bottom = 408.0
+margin_left = 176.0
+margin_top = 352.0
+margin_right = 360.0
+margin_bottom = 376.0
 step = 0.1
 value = 1.0
 align = 1
@@ -447,19 +449,20 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Charter/SpinBox"]
-margin_top = -16.0
-margin_right = 122.0
-margin_bottom = -2.0
+margin_left = -152.0
+margin_right = -30.0
+margin_bottom = 24.0
 text = "Animation Speed"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CheckBox" type="CheckBox" parent="Charter"]
 margin_left = 104.0
-margin_top = 416.0
+margin_top = 384.0
 margin_right = 128.0
-margin_bottom = 440.0
+margin_bottom = 408.0
 pressed = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -733,8 +736,8 @@ margin_left = 24.0
 margin_top = 232.0
 margin_right = 360.0
 margin_bottom = 256.0
-custom_styles/read_only = SubResource( 14 )
-custom_styles/normal = SubResource( 14 )
+custom_styles/read_only = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 align = 1
 editable = false
 placeholder_text = "No starting transition"
@@ -746,7 +749,7 @@ __meta__ = {
 margin_left = 384.0
 margin_right = 640.0
 margin_bottom = 512.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -777,7 +780,7 @@ hframes = 3
 vframes = 2
 
 [node name="Anim" type="AnimationPlayer" parent="Preview/Preview"]
-anims/Loop = SubResource( 8 )
+anims/Loop = SubResource( 9 )
 
 [node name="PreviewSFX" type="AudioStreamPlayer" parent="Preview/Preview"]
 bus = "SFX"
@@ -791,8 +794,8 @@ hframes = 3
 vframes = 2
 
 [node name="Anim" type="AnimationPlayer" parent="Preview/Fx"]
-anims/Loop = SubResource( 15 )
-anims/Loop_fx = SubResource( 16 )
+anims/Loop = SubResource( 10 )
+anims/Loop_fx = SubResource( 11 )
 
 [node name="Tween" type="Tween" parent="Preview/Fx"]
 
@@ -809,6 +812,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="Preview/Flash"]
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="Preview"]
+bus = "SFX"
 
 [node name="PlayPause" type="Button" parent="Preview"]
 margin_left = 16.0
@@ -822,9 +826,9 @@ __meta__ = {
 
 [node name="Stop" type="Button" parent="Preview"]
 margin_left = 136.0
-margin_top = 72.0
+margin_top = 70.8775
 margin_right = 240.0
-margin_bottom = 96.0
+margin_bottom = 94.8775
 text = "Stop / Reset"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -874,8 +878,8 @@ margin_left = 34.0
 margin_right = 58.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_styles/disabled = SubResource( 11 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
 disabled = true
 
 [node name="Button3" type="Button" parent="Preview/HBoxContainer"]
@@ -884,8 +888,8 @@ margin_left = 69.0
 margin_right = 93.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 10 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 14 )
 disabled = true
 
 [node name="Button4" type="Button" parent="Preview/HBoxContainer"]
@@ -894,8 +898,8 @@ margin_left = 104.0
 margin_right = 128.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 13 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 15 )
 disabled = true
 
 [node name="CurrentBeat" type="Panel" parent="Preview"]
@@ -973,7 +977,7 @@ margin_left = 80.0
 margin_top = 96.0
 margin_right = 320.0
 margin_bottom = 128.0
-custom_styles/normal = SubResource( 9 )
+custom_styles/normal = SubResource( 16 )
 align = 1
 placeholder_text = "Enter Mod Name"
 __meta__ = {
@@ -1031,8 +1035,8 @@ __meta__ = {
 [connection signal="item_rmb_selected" from="Transitions/TransitionList" to="Transitions" method="_on_TransitionList_item_rmb_selected"]
 [connection signal="preview" from="Preview" to="Conductor" method="_on_preview"]
 [connection signal="button_up" from="Preview/PlayPause" to="Preview" method="_on_PlayStop_button_up"]
-[connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/GoToBeat" to="Conductor" method="_on_GoToBeat"]
 [connection signal="value_changed" from="Preview/GoToBeat/BeatNum" to="Conductor" method="_on_BeatNum_value_changed"]
 [connection signal="beat" from="Conductor" to="Preview" method="_on_Conductor_beat"]
