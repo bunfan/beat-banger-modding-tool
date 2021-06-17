@@ -82,12 +82,11 @@ func write_file_data(write_dir):
 func _on_BpmField_value_changed(value):
 	Global.bpm = value
 	Global.bps = (60 / Global.bpm)
-	print(Global.bps)
 
 func _on_Charter_tree_exiting():
 	if Global.popup_file_path == "": return
-	user_data.set_value("data", "popup_dir", Global.popup_file_path)
 	user_data.set_value("data", "mod_dir", Global.save_dir)
+	user_data.set_value("data", "popup_dir", Global.popup_file_path)
 	user_data.save("user://tool_data.cfg")
 
 

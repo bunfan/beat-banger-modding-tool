@@ -53,13 +53,14 @@ func _on_Stop_button_up():
 
 	# Stop Aniamtion
 	$Preview/Anim.stop()
+	load_starting_image()
 
 func _on_Conductor_beat(half_beat):
 	if Global.previewing == false: return
 
 	# Transitions
 	if !Global.transition_array.empty():
-		for transition in Global.transition_array:
+		for transition in Global.transition_array: # [beat, {object}]	
 			if transition[0] == half_beat:
 				flash()
 				load_image(transition)
@@ -104,11 +105,20 @@ func run_loop():
 
 func _on_LoopSpeed_changed(value):
 	Global.loop_speed = value
+
+func load_starting_image():
+	if Global.initial_data.empty(): return
+	if Global.initial_data["animation"] == "": return
+	var img = Image.new()
+	if img.load(Global.save_dir + "/" + Global.chart_name + "/anims/" + Global.initial_data["animation"]) == OK:
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		$Preview.texture = tex
 	
 func load_image(transition):
 	if transition[1]["animation"] == "": return
 	var img = Image.new()
-	if img.load(Global.save_dir + Global.chart_name + "/anims/" + transition[1]["animation"]) == OK:
+	if img.load(Global.save_dir + "/" + Global.chart_name + "/anims/" + transition[1]["animation"]) == OK:
 		var tex = ImageTexture.new()
 		tex.create_from_image(img)
 		$Preview.texture = tex
@@ -116,7 +126,7 @@ func load_image(transition):
 func load_fx(transition):
 	if transition[1]["effects"] == "": return
 	var img = Image.new()
-	if img.load(Global.save_dir + Global.chart_name + "/anims/fx/" + transition[1]["effects"]) == OK:
+	if img.load(Global.save_dir + "/" + Global.chart_name + "/anims/fx/" + transition[1]["effects"]) == OK:
 		var tex = ImageTexture.new()
 		tex.create_from_image(img)
 		$Fx.texture = tex
@@ -125,7 +135,7 @@ func load_fx(transition):
 func load_ogg_and_play(transition):
 	if transition[1]["transition_sound"] == "": return
 	var ogg_file = File.new()
-	if ogg_file.open(Global.save_dir + Global.chart_name + "/sfx/" + transition[1]["transition_sound"], File.READ) == OK:
+	if ogg_file.open(Global.save_dir + "/" + Global.chart_name + "/sfx/" + transition[1]["transition_sound"], File.READ) == OK:
 		var bytes = ogg_file.get_buffer(ogg_file.get_len())
 		var stream_data = AudioStreamOGGVorbis.new()
 		stream_data.data = bytes

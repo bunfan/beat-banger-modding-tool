@@ -67,6 +67,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "Loop_fx"
@@ -236,8 +248,8 @@ __meta__ = {
 [node name="PatternFileDialog" type="FileDialog" parent="Charter/PatternPath"]
 margin_left = 376.0
 margin_top = -64.0
-margin_right = 720.0
-margin_bottom = 296.0
+margin_right = 1128.0
+margin_bottom = 480.0
 window_title = "Open a File"
 resizable = true
 mode = 0
@@ -783,10 +795,12 @@ bus = "SFX"
 [node name="Tween" type="Tween" parent="Preview/Preview"]
 
 [node name="Fx" type="Sprite" parent="Preview"]
+visible = false
 position = Vector2( 128, 284 )
 scale = Vector2( 0.373333, 0.37 )
 hframes = 3
 vframes = 2
+frame = 5
 
 [node name="Anim" type="AnimationPlayer" parent="Preview/Fx"]
 anims/Loop = SubResource( 9 )
@@ -1529,13 +1543,13 @@ __meta__ = {
 [connection signal="item_rmb_selected" from="Transitions/TransitionList" to="Transitions" method="_on_TransitionList_item_rmb_selected"]
 [connection signal="preview" from="Preview" to="Conductor" method="_on_preview"]
 [connection signal="button_up" from="Preview/PlayPause" to="Preview" method="_on_PlayStop_button_up"]
-[connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/Stop" to="Timeline" method="_on_Stop_button_up"]
+[connection signal="button_up" from="Preview/Stop" to="Preview" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/Stop" to="Conductor" method="_on_Stop_button_up"]
 [connection signal="button_up" from="Preview/GoToBeat" to="Conductor" method="_on_GoToBeat"]
 [connection signal="value_changed" from="Preview/GoToBeat/BeatNum" to="Conductor" method="_on_BeatNum_value_changed"]
-[connection signal="beat" from="Conductor" to="Preview" method="_on_Conductor_beat"]
 [connection signal="beat" from="Conductor" to="Timeline" method="_on_Conductor_beat"]
+[connection signal="beat" from="Conductor" to="Preview" method="_on_Conductor_beat"]
 [connection signal="beat" from="Conductor" to="Preview/CurrentBeat" method="_on_Conductor_beat"]
 [connection signal="dir_selected" from="Splash/Panel/ModDir/FileDialog" to="Splash" method="_on_FileDialog_dir_selected"]
 [connection signal="button_up" from="Splash/Panel/ModDir/Button" to="Splash" method="_on_mod_dir_button"]

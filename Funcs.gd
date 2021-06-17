@@ -22,6 +22,23 @@ func copy_to_files(old_path, filename, destination):
 		if dir.open(chart_dir) == OK:
 			dir.copy(old_path, chart_dir + filename)
 			print("Writing to %s" % filename)
-	
+
+func store_asset(path, dialog, field):
+	Global.popup_file_path = path.trim_suffix(dialog.current_file)
+	field.text = dialog.current_file
+	print("Loaded %s" % dialog.current_file)
+	return [path, dialog.current_file]
+
+func store_image_asset(path, dialog, field, image):
+	var img = Image.new()
+	var tex = ImageTexture.new()	
+	Global.popup_file_path = path.trim_suffix(dialog.current_file)
+	field.text = dialog.current_file
+	print("loaded %s" % path)
+	img.load(path)
+	tex.create_from_image(img)
+	image.scale = Vector2(0.373,0.37)
+	image.texture = tex
+	return [path, dialog.current_file]
 
 

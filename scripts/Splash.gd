@@ -5,8 +5,11 @@ var startup_config = ConfigFile.new()
 func _ready():
 	if startup_config.load("user://tool_data.cfg") == OK:
 		Global.save_dir = startup_config.get_value("data", "mod_dir", null)
-		$Panel/ModDir.text = Global.save_dir
+		
+	if Global.save_dir != null:
 		$Panel/Button.disabled = false
+
+	$Panel/ModDir.text = "None" if Global.save_dir == null else Global.save_dir
 	$Panel/ModName.grab_focus()
 
 func _on_splash_button_up():
