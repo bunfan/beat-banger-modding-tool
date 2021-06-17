@@ -33,6 +33,7 @@ func _ready():
 func connect_buttons():
 	for i in timeline_nodes.size():
 		timeline_nodes[i].connect("gui_input", self, "_on_pressed", [i])
+		timeline_nodes[i].get_child(0).get_child(0).text = str(i + (16 * Global.timeline_page))
 
 func _on_pressed(event, i):
 	if event is InputEventMouseButton and event.pressed:
@@ -55,7 +56,8 @@ func clear_from_arrays(beat_num, global, local):
 			keyframe.erase(beat_num)
 		print(local)
 
-
+func _on_Stop_button_up():
+	refresh_nodes(0)
 
 func _on_Conductor_beat(beat):
 	Global.timeline_page = int(beat / 16)
@@ -65,8 +67,11 @@ func _on_Conductor_beat(beat):
 func refresh_nodes(beat):
 	for i in timeline_nodes.size():
 		timeline_nodes[i].modulate = Color(1,1,1,0.2)
+		timeline_nodes[i].get_child(0).get_child(0).text = str(i + (16 * Global.timeline_page))
 	timeline_nodes[beat].modulate = Color(1,1,1,1)
 	draw_colors()
+
+	
 
 func draw_colors():
 	clear_colors()
@@ -104,6 +109,9 @@ func chart_data_to_keyframe(source, target):
 		for obj in target:
 			if obj.keys().has(beat): return
 		target.append({beat:designated_page})
+
+
+
 
 
 

@@ -13,13 +13,15 @@ func load_ogg(path):
 	return ogg_stream
 
 func copy_to_files(old_path, filename, destination):
-
-	var chart_dir = Global.save_dir + Global.chart_name	
+	var chart_dir = Global.save_dir + "/" + Global.chart_name + destination
 
 	if filename.is_valid_filename():
-		var sfx_dir = Directory.new()
-		if sfx_dir.open(chart_dir + destination) == OK:
-			sfx_dir.copy(old_path, chart_dir + destination + filename)
+		print("trying to copy to %s" % chart_dir + filename)
+
+		var dir = Directory.new()
+		if dir.open(chart_dir) == OK:
+			dir.copy(old_path, chart_dir + filename)
+			print("Writing to %s" % filename)
 	
 
 

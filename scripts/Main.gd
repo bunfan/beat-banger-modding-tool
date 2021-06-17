@@ -1,8 +1,7 @@
 extends Control
 
 func _ready():
-	Global.save_dir = "user://" if OS.is_debug_build() == true else Global.exe_path
-	$Splash/Panel/Dir.text = Global.save_dir
+	$Splash/Panel/Dir.text = "No Directory Selected" if Global.save_dir == null else Global.save_dir
 	$Splash.visible = true
 	
 # Song OGG
@@ -18,48 +17,6 @@ func on_song_selected(path):
 	$Charter/SongPathField.text = Global.song_file_name
 	$Conductor.stream = Func.load_ogg(Global.song_file_path)
 	# print("loaded %s" % path)
-
-	
-	
-# Midi / Json
-
-# func json_popup():
-# 	$Charter/JsonPath/JsonFileDialog.current_dir = Global.popup_file_path
-# 	$Charter/JsonPath/JsonFileDialog.popup()
-
-# func on_json_selected(path):
-# 	Global.json_file_path = path
-# 	Global.json_file_name = $Charter/JsonPath/JsonFileDialog.current_file
-# 	Global.popup_file_path = $Charter/JsonPath/JsonFileDialog.current_dir
-# 	$Charter/JsonPath.text = Global.json_file_name
-# 	print("loaded %s" % path)
-# 	collecct_midi_data(path)
-# # Background Pattern
-
-# func pattern_popup():
-# 	$Charter/PatternPath/PatternFileDialog.current_dir = Global.popup_file_path
-# 	$Charter/PatternPath/PatternFileDialog.popup()
-
-# func on_pattern_selected(path):
-# 	Global.pattern_file_path = path
-# 	Global.pattern_file_name = $Charter/PatternPath/PatternFileDialog.current_file
-# 	Global.popup_file_path = $Charter/PatternPath/PatternFileDialog.current_dir
-# 	$Charter/PatternPath.text = Global.pattern_file_name
-# 	print("loaded %s" % path)
-
-# func collecct_midi_data(midi_path):
-# 	var file = File.new()
-# 	if file.open(midi_path, File.READ) == OK:
-# 		var text: String = file.get_as_text()
-# 		var data = JSON.parse(text)
-# 		var midi = data.result
-# 		Global.bpm = float(midi["header"]["bpm"])	
-# 		$Charter/Bpm/CenterContainer/Label.text = str(Global.bpm)
-# 		Global.bps = (60 / Global.bpm)
-# 		Global.load_chart(midi)
-
-
-
 
 # Sprite Sheet
 
@@ -163,3 +120,15 @@ func on_game_over_path_selected(path):
 	Global.popup_file_path = $Charter/GameOverSfxPath/GameOverSfxFileDialog.current_path
 	$Charter/GameOverSfxPath.text = Global.game_over_sfx_name
 	print("loaded %s" % path)
+
+func pattern_popup():
+	$Charter/PatternPath/PatternFileDialog.current_path = Global.popup_file_path
+	$Charter/PatternPath/PatternFileDialog.popup()
+
+func on_pattern_selected(path):
+	Global.pattern_file_path = path
+	Global.pattern_file_name = $Charter/PatternPath/PatternFileDialog.current_file
+	Global.popup_file_path = $Charter/PatternPath/PatternFileDialog.current_path
+	$Charter/PatternPath.text = Global.pattern_file_name
+	print("loaded %s" % path)
+
